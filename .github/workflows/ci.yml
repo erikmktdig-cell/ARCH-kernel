@@ -55,7 +55,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
           cache-suffix: ${{ matrix.os }}-${{ matrix.python }}
-      - run: uv sync --frozen --all-groups
+      - run: uv sync --frozen --all-groups --python ${{ matrix.python }}
       - name: Full branch-coverage suite
         if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12'
         run: uv run pytest -p no:cacheprovider
@@ -107,7 +107,9 @@ jobs:
           cache-dependency-glob: uv.lock
       - run: uv sync --frozen --all-groups
       - run: uv run python scripts/check_reproducible_build.py
-      - run: uv run pytest -p no:cacheprovider -m release -k freshness
+      - run: >-
+          uv run pytest -p no:cacheprovider -o addopts=
+          -m release -k generated_release_inputs
 
   security:
     runs-on: ubuntu-latest

@@ -24,6 +24,7 @@ def test_ci_permissions_matrix_and_visible_suites() -> None:
     assert "-m regression" in workflow
     assert "secrets." not in workflow
     assert "uv.lock" in workflow
+    assert "uv sync --frozen --all-groups --python ${{ matrix.python }}" in workflow
 
 
 def test_ci_actions_are_version_pinned() -> None:
@@ -41,3 +42,8 @@ def test_release_workflow_is_non_publishing_and_tag_checked() -> None:
     assert "upload-artifact" in workflow
     assert "pypi" not in workflow.casefold()
     assert "release create" not in workflow.casefold()
+
+
+def test_repository_forces_canonical_lf_checkouts() -> None:
+    attributes = (ROOT / ".gitattributes").read_text(encoding="utf-8")
+    assert "* text=auto eol=lf" in attributes.splitlines()

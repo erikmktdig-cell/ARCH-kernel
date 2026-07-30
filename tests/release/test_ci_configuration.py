@@ -26,10 +26,10 @@ def test_ci_permissions_matrix_and_visible_suites() -> None:
     assert "uv.lock" in workflow
 
 
-def test_ci_actions_are_major_pinned() -> None:
+def test_ci_actions_are_version_pinned() -> None:
     for filename in ("ci.yml", "release-check.yml"):
         for action in re.findall(r"uses:\s+([^\s]+)", _workflow(filename)):
-            assert re.fullmatch(r"[^@]+@v\d+", action), action
+            assert re.fullmatch(r"[^@]+@v\d+(?:\.\d+\.\d+)?", action), action
 
 
 def test_release_workflow_is_non_publishing_and_tag_checked() -> None:

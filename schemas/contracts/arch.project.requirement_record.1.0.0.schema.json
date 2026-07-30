@@ -1,0 +1,144 @@
+{
+  "$id": "https://schemas.arch.local/arch.project.requirement_record/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Versioned requirement and its artifact traceability links.",
+  "properties": {
+    "acceptance_criteria": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Acceptance Criteria",
+      "type": "array"
+    },
+    "artifact_ids": {
+      "items": {
+        "examples": [
+          "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+        ],
+        "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+        "title": "ArtifactId",
+        "type": "string"
+      },
+      "title": "Artifact Ids",
+      "type": "array"
+    },
+    "contract_name": {
+      "title": "Contract Name",
+      "type": "string"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "priority": {
+      "enum": [
+        "must",
+        "should",
+        "could",
+        "wont"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "record_version": {
+      "minimum": 1,
+      "title": "Record Version",
+      "type": "integer"
+    },
+    "requirement_id": {
+      "examples": [
+        "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+      ],
+      "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "title": "RequirementId",
+      "type": "string"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source"
+    },
+    "state_version_created": {
+      "minimum": 0,
+      "title": "State Version Created",
+      "type": "integer"
+    },
+    "state_version_updated": {
+      "minimum": 0,
+      "title": "State Version Updated",
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "proposed",
+        "accepted",
+        "implemented",
+        "verified",
+        "rejected",
+        "deferred"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated At"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "schema_uri",
+    "created_at",
+    "record_version",
+    "state_version_created",
+    "state_version_updated",
+    "requirement_id",
+    "title",
+    "description",
+    "priority",
+    "status"
+  ],
+  "title": "RequirementRecord",
+  "type": "object"
+}

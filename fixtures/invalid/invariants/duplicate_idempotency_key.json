@@ -1,0 +1,1 @@
+{"scenario":"duplicate_idempotency_key","kind":"immutable_history_consistency","mutation":"repeat key in same project and aggregate","expected_violations":1}

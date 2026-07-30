@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "InvariantEvaluationTarget": {
+      "enum": [
+        "original",
+        "projected",
+        "both"
+      ],
+      "title": "InvariantEvaluationTarget",
+      "type": "string"
+    },
+    "InvariantScope": {
+      "description": "Closed scopes available for deterministic invariant selection.",
+      "enum": [
+        "project",
+        "lifecycle",
+        "phase",
+        "artifact",
+        "requirement",
+        "risk",
+        "dependency",
+        "history"
+      ],
+      "title": "InvariantScope",
+      "type": "string"
+    },
+    "ValidationStage": {
+      "enum": [
+        "contract",
+        "aggregate",
+        "patch",
+        "transition",
+        "invariant",
+        "finalization"
+      ],
+      "title": "ValidationStage",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.validation.validation_pipeline_policy/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "continue_after_blocking_failure": {
+      "default": false,
+      "title": "Continue After Blocking Failure",
+      "type": "boolean"
+    },
+    "enabled_stages": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/ValidationStage"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Enabled Stages"
+    },
+    "expose_transition_outputs": {
+      "default": true,
+      "title": "Expose Transition Outputs",
+      "type": "boolean"
+    },
+    "invariant_target": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/InvariantEvaluationTarget"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "non_blocking_findings_affect_disposition": {
+      "default": true,
+      "title": "Non Blocking Findings Affect Disposition",
+      "type": "boolean"
+    },
+    "prevent_projected_invariants_after_failed_projection": {
+      "default": true,
+      "title": "Prevent Projected Invariants After Failed Projection",
+      "type": "boolean"
+    },
+    "selected_invariant_keys": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Invariant Keys"
+    },
+    "selected_invariant_scopes": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/InvariantScope"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Invariant Scopes"
+    }
+  },
+  "title": "ValidationPipelinePolicy",
+  "type": "object"
+}

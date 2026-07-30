@@ -1,0 +1,299 @@
+{
+  "$defs": {
+    "ActorType": {
+      "description": "Kinds of actors that may originate an event.",
+      "enum": [
+        "human",
+        "agent",
+        "system",
+        "integration"
+      ],
+      "title": "ActorType",
+      "type": "string"
+    },
+    "EventActor": {
+      "additionalProperties": false,
+      "description": "Strict immutable attribution for an event.",
+      "properties": {
+        "actor_id": {
+          "title": "Actor Id",
+          "type": "string"
+        },
+        "actor_type": {
+          "$ref": "#/$defs/ActorType"
+        },
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Display Name"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "actor_type",
+        "actor_id"
+      ],
+      "title": "EventActor",
+      "type": "object"
+    },
+    "PatchJsonValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "PatchOperation": {
+      "additionalProperties": false,
+      "description": "One immutable add, replace, remove, or test operation.",
+      "properties": {
+        "expected_content_fingerprint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Content Fingerprint"
+        },
+        "expected_record_version": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Record Version"
+        },
+        "op": {
+          "$ref": "#/$defs/PatchOperationType"
+        },
+        "path": {
+          "examples": [
+            "/artifacts/ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1C"
+          ],
+          "pattern": "^/[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*$",
+          "title": "PatchPath",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PatchJsonValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "op",
+        "path"
+      ],
+      "title": "PatchOperation",
+      "type": "object"
+    },
+    "PatchOperationType": {
+      "description": "Operations supported by the WP-K05 patch contract.",
+      "enum": [
+        "add",
+        "replace",
+        "remove",
+        "test"
+      ],
+      "title": "PatchOperationType",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.patch.state_patch/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Immutable declaration of an atomic ProjectState change.",
+  "properties": {
+    "base_state_content_fingerprint": {
+      "title": "Base State Content Fingerprint",
+      "type": "string"
+    },
+    "base_state_record_version": {
+      "minimum": 1,
+      "title": "Base State Record Version",
+      "type": "integer"
+    },
+    "contract_name": {
+      "title": "Contract Name",
+      "type": "string"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "created_by": {
+      "$ref": "#/$defs/EventActor"
+    },
+    "operations": {
+      "items": {
+        "$ref": "#/$defs/PatchOperation"
+      },
+      "minItems": 1,
+      "title": "Operations",
+      "type": "array"
+    },
+    "patch_id": {
+      "examples": [
+        "PATCH-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+      ],
+      "pattern": "^PATCH-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "title": "PatchId",
+      "type": "string"
+    },
+    "project_id": {
+      "examples": [
+        "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+      ],
+      "pattern": "^PRJ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "title": "ProjectId",
+      "type": "string"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "scope": {
+      "items": {
+        "examples": [
+          "/artifacts/ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1C"
+        ],
+        "pattern": "^/[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*$",
+        "title": "PatchPath",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Scope",
+      "type": "array"
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated At"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "schema_uri",
+    "created_at",
+    "patch_id",
+    "project_id",
+    "base_state_record_version",
+    "base_state_content_fingerprint",
+    "operations",
+    "created_by",
+    "scope"
+  ],
+  "title": "StatePatch",
+  "type": "object"
+}

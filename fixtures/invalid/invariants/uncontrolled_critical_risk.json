@@ -1,0 +1,1 @@
+{"scenario":"uncontrolled_critical_risk","kind":"critical_risk_control","mutation":"score=25, mitigation=null, status=open","expected_violations":1}

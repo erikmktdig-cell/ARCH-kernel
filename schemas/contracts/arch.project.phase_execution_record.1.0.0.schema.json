@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "PhaseCode": {
+      "description": "Canonical ARch phase codes.",
+      "enum": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F15"
+      ],
+      "title": "PhaseCode",
+      "type": "string"
+    },
+    "PhaseStatus": {
+      "description": "Canonical lifecycle status for phase execution.",
+      "enum": [
+        "not_started",
+        "eligible",
+        "ready",
+        "active",
+        "blocked",
+        "awaiting_approval",
+        "in_review",
+        "completed",
+        "completed_with_conditions",
+        "revalidation_pending",
+        "reopened",
+        "cancelled"
+      ],
+      "title": "PhaseStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.project.phase_execution_record/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Versioned execution record for an individual project phase.",
+  "properties": {
+    "artifact_ids": {
+      "items": {
+        "examples": [
+          "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+        ],
+        "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+        "title": "ArtifactId",
+        "type": "string"
+      },
+      "title": "Artifact Ids",
+      "type": "array"
+    },
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "blocked_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blocked Reason"
+    },
+    "completed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Completed At"
+    },
+    "contract_name": {
+      "title": "Contract Name",
+      "type": "string"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "phase_code": {
+      "$ref": "#/$defs/PhaseCode"
+    },
+    "phase_id": {
+      "examples": [
+        "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+      ],
+      "pattern": "^PHS-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "title": "PhaseId",
+      "type": "string"
+    },
+    "record_version": {
+      "minimum": 1,
+      "title": "Record Version",
+      "type": "integer"
+    },
+    "requirement_ids": {
+      "items": {
+        "examples": [
+          "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+        ],
+        "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+        "title": "RequirementId",
+        "type": "string"
+      },
+      "title": "Requirement Ids",
+      "type": "array"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "started_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Started At"
+    },
+    "state_version_created": {
+      "minimum": 0,
+      "title": "State Version Created",
+      "type": "integer"
+    },
+    "state_version_updated": {
+      "minimum": 0,
+      "title": "State Version Updated",
+      "type": "integer"
+    },
+    "status": {
+      "$ref": "#/$defs/PhaseStatus"
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated At"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "schema_uri",
+    "created_at",
+    "record_version",
+    "state_version_created",
+    "state_version_updated",
+    "phase_id",
+    "phase_code",
+    "status",
+    "attempt"
+  ],
+  "title": "PhaseExecutionRecord",
+  "type": "object"
+}

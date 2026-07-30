@@ -1,0 +1,37 @@
+{
+  "contract_name": "state_patch",
+  "contract_version": "1.0.0",
+  "schema_uri": "urn:arch:contracts:state_patch:1.0.0",
+  "created_at": "2026-07-23T13:00:00Z",
+  "patch_id": "PATCH-01HZX7M3FQ1T2Q9V8Y6K4C2B1K",
+  "project_id": "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A",
+  "base_state_record_version": 1,
+  "base_state_content_fingerprint": "sha256:37af488676c7b9f696e6c391e447b3da61b8074417778408080bfc6faa2feaaa",
+  "operations": [{
+    "op": "replace",
+    "path": "/profile",
+    "value": {
+      "contract_name": "project_profile",
+      "contract_version": "1.0.0",
+      "schema_uri": "urn:arch:contracts:project_profile:1.0.0",
+      "created_at": "2026-07-23T12:00:00Z",
+      "updated_at": "2026-07-23T12:05:00Z",
+      "project_type": "service",
+      "criticality": "high",
+      "default_route": "standard",
+      "objectives": ["Deliver a deterministic project state."],
+      "constraints": ["No persistence in the kernel."],
+      "success_criteria": ["The fixture round-trips without data loss."]
+    }
+  }],
+  "created_by": {
+    "contract_name": "event_actor",
+    "contract_version": "1.0.0",
+    "schema_uri": "urn:arch:contracts:event_actor:1.0.0",
+    "created_at": "2026-07-23T13:00:00Z",
+    "actor_type": "human",
+    "actor_id": "platform-engineer"
+  },
+  "reason": "Replace the project profile atomically.",
+  "scope": ["/profile"]
+}

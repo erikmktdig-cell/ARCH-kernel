@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "ActorType": {
+      "description": "Kinds of actors that may originate an event.",
+      "enum": [
+        "human",
+        "agent",
+        "system",
+        "integration"
+      ],
+      "title": "ActorType",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.event.event_actor/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Strict immutable attribution for an event.",
+  "properties": {
+    "actor_id": {
+      "title": "Actor Id",
+      "type": "string"
+    },
+    "actor_type": {
+      "$ref": "#/$defs/ActorType"
+    },
+    "contract_name": {
+      "title": "Contract Name",
+      "type": "string"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "display_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Display Name"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated At"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "schema_uri",
+    "created_at",
+    "actor_type",
+    "actor_id"
+  ],
+  "title": "EventActor",
+  "type": "object"
+}

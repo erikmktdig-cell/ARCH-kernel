@@ -1,0 +1,11 @@
+{
+  "cases": [
+    {"name": "typed_state", "intent": "validate_state", "state_fixture": "valid/minimal_project_state.json"},
+    {"name": "raw_state", "intent": "validate_state", "state_fixture": "valid/minimal_project_state.json"},
+    {"name": "equivalent_typed_and_raw_state", "intent": "validate_state", "state_fixture": "valid/minimal_project_state.json"},
+    {"name": "projected_patch", "intent": "validate_patch", "state_fixture": "valid/minimal_project_state.json", "patch_fixture": "valid/state_patch/replace_project_profile.json"},
+    {"name": "projected_transition", "intent": "validate_transition", "state_fixture": "valid/minimal_project_state.json", "transition_fixture": "valid/transitions/artifact_approval_request.json"},
+    {"name": "release_original", "intent": "validate_release", "state_fixture": "valid/minimal_project_state.json"},
+    {"name": "history_original", "intent": "validate_history", "state_fixture": "valid/minimal_project_state.json", "history_fixture": "valid/event_envelope.json"}
+  ]
+}

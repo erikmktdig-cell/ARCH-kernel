@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {"name": "missing_state", "expected_code": "INVALID_VALIDATION_REQUEST"},
+    {"name": "patch_missing_patch", "expected_code": "INVALID_VALIDATION_REQUEST"},
+    {"name": "transition_missing_request", "expected_code": "INVALID_VALIDATION_REQUEST"},
+    {"name": "history_on_state_intent", "expected_code": "INVALID_VALIDATION_REQUEST"},
+    {"name": "conflicting_typed_raw_state", "expected_code": "INVALID_VALIDATION_REQUEST"},
+    {"name": "malformed_raw_state", "expected_code": "MISSING"},
+    {"name": "conflicting_typed_raw_patch", "expected_code": "INVALID_VALIDATION_REQUEST"},
+    {"name": "malformed_raw_patch", "expected_code": "MISSING"},
+    {"name": "stale_patch", "expected_code": "STALE_STATE_VERSION"},
+    {"name": "missing_transition_registry", "expected_code": "MISSING_TRANSITION_REGISTRY"},
+    {"name": "missing_invariant_registry", "expected_code": "MISSING_INVARIANT_REGISTRY"},
+    {"name": "input_fingerprint_mismatch", "expected_code": "INVALID_VALIDATION_REQUEST"},
+    {"name": "projected_invariant_without_projection", "expected_code": "VALIDATION_STAGE_FAILED"},
+    {"name": "unknown_invariant_key", "expected_code": "INVARIANT_EVALUATION_ERROR"}
+  ]
+}

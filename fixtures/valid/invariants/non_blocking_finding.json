@@ -1,0 +1,6 @@
+{
+  "scenario": "non_blocking_invariant_finding",
+  "kind": "immutable_history_consistency",
+  "blocking": false,
+  "expected_disposition": "accepted_with_findings"
+}

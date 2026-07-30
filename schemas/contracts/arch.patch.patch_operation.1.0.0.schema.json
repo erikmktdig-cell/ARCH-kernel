@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "PatchJsonValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "PatchOperationType": {
+      "description": "Operations supported by the WP-K05 patch contract.",
+      "enum": [
+        "add",
+        "replace",
+        "remove",
+        "test"
+      ],
+      "title": "PatchOperationType",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.patch.patch_operation/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One immutable add, replace, remove, or test operation.",
+  "properties": {
+    "expected_content_fingerprint": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Content Fingerprint"
+    },
+    "expected_record_version": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Record Version"
+    },
+    "op": {
+      "$ref": "#/$defs/PatchOperationType"
+    },
+    "path": {
+      "examples": [
+        "/artifacts/ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1C"
+      ],
+      "pattern": "^/[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*$",
+      "title": "PatchPath",
+      "type": "string"
+    },
+    "value": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PatchJsonValue"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "op",
+    "path"
+  ],
+  "title": "PatchOperation",
+  "type": "object"
+}

@@ -1,0 +1,6 @@
+{
+  "state_fixture": "../minimal_project_state.json",
+  "snapshot_order": "oldest_to_newest",
+  "record_versions": [1, 2],
+  "expected_violations": 0
+}

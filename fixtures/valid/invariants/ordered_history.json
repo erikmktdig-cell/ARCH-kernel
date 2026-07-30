@@ -1,0 +1,6 @@
+{
+  "base_event_fixture": "../event_envelope.json",
+  "derived_event_id": "EVT-01HZX7M3FQ1T2Q9V8Y6K4C2B1H",
+  "canonical_order": ["occurred_at", "recorded_at", "event_id"],
+  "expected_violations": 0
+}

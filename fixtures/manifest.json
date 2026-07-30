@@ -1,0 +1,574 @@
+{
+  "manifest_version": "1.0.0",
+  "entries": [
+    {
+      "key": "invalid.contract_registry.cases",
+      "path": "invalid/contract_registry/cases.json",
+      "owner": "WP-K09",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:a00b9603f03f7e979b015210a953763faa54e8852e51e6d7726bd5ee0b8be9d1"
+    },
+    {
+      "key": "invalid.events.aggregate_type_mismatch",
+      "path": "invalid/events/aggregate_type_mismatch.json",
+      "owner": "WP-K04",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:cc91e04ff162985d929d53551063117eff22b9174cf3612a47e1ce744208c940"
+    },
+    {
+      "key": "invalid.events.causation_without_correlation",
+      "path": "invalid/events/causation_without_correlation.json",
+      "owner": "WP-K04",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:23bdba832b9b4a31cdf07d2957a45c70cc4fd1f423d040cde8b79a4a95b7ab71"
+    },
+    {
+      "key": "invalid.events.invalid_event_type",
+      "path": "invalid/events/invalid_event_type.json",
+      "owner": "WP-K04",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:4ef5a907a4e4c71aa2093e405e1ae324c14ec5381bc10e29ab91874bd8d6e7c6"
+    },
+    {
+      "key": "invalid.events.invalid_idempotency_key",
+      "path": "invalid/events/invalid_idempotency_key.json",
+      "owner": "WP-K04",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:8db424aaf1c248c9bae669680284b0fe6d9c03db9e3907ed1e06c2f2afb92342"
+    },
+    {
+      "key": "invalid.events.invalid_payload",
+      "path": "invalid/events/invalid_payload.json",
+      "owner": "WP-K04",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:5bace4371e331aecc5279b1f5b90f11abe05f630f3415ed7bbedc874e8f1e0aa"
+    },
+    {
+      "key": "invalid.events.naive_timestamp",
+      "path": "invalid/events/naive_timestamp.json",
+      "owner": "WP-K04",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:49b7aeefc532e741e03d63599d07a1c1e67d1a8ca302f4a25754ef38dd648f43"
+    },
+    {
+      "key": "invalid.events.reverse_timestamp_order",
+      "path": "invalid/events/reverse_timestamp_order.json",
+      "owner": "WP-K04",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:f9c211554bae5353b47b1ae37679cb3ac76b67a4bee53f08d8b09eb1e1dba82c"
+    },
+    {
+      "key": "invalid.events.self_causation",
+      "path": "invalid/events/self_causation.json",
+      "owner": "WP-K04",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:d9499ddbd212bada809a7b02f8e4ddaedb8e8ed6ebb2e433b95d1e4591d83481"
+    },
+    {
+      "key": "invalid.events.unknown_field",
+      "path": "invalid/events/unknown_field.json",
+      "owner": "WP-K04",
+      "fixture_class": "invalid_contract",
+      "expected_primary": "CONTRACT_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:eec455c4f01890bd93b8fb1b5cb871c071780f25183ca58d9da4e097c5c49d3f"
+    },
+    {
+      "key": "invalid.invariants.changed_content_same_version",
+      "path": "invalid/invariants/changed_content_same_version.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:a5b6589000b3bdd8581046dafe5185dc89ef24119a55ef2c20ec9c36e0b281ca"
+    },
+    {
+      "key": "invalid.invariants.decreasing_record_version",
+      "path": "invalid/invariants/decreasing_record_version.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:9862ef2451ab63ea5ce6149f4fcf785fecd4c14bb439b768a76d40782166a2c6"
+    },
+    {
+      "key": "invalid.invariants.duplicate_event_id",
+      "path": "invalid/invariants/duplicate_event_id.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:0fbb3f2a9e4cf7db3eb8b11e826a2a90185210eb9b46af6aa548cab529536f47"
+    },
+    {
+      "key": "invalid.invariants.duplicate_id",
+      "path": "invalid/invariants/duplicate_id.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:94b2744268ebd54b487f197b82b44a7700850da9e1539d345af7a7b106aeb3f6"
+    },
+    {
+      "key": "invalid.invariants.duplicate_idempotency_key",
+      "path": "invalid/invariants/duplicate_idempotency_key.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:497872bc101235b2b61906f7289572eb39e329c95514c5199379a35bd676ab2f"
+    },
+    {
+      "key": "invalid.invariants.duplicate_key",
+      "path": "invalid/invariants/duplicate_key.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:981e8653665de7f3761cfa7d061cd14b5324fd4cd4705211b5912ecd949c6fe1"
+    },
+    {
+      "key": "invalid.invariants.event_other_project",
+      "path": "invalid/invariants/event_other_project.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:6419afa64b5523cfbf3bc31187951920510b597f923153a604c5a44d2e111928"
+    },
+    {
+      "key": "invalid.invariants.forward_causation",
+      "path": "invalid/invariants/forward_causation.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:27b81aa0afc898d2dd7365e5d14e88b13135ba4a86e7a0d9a5ff44e579bd5809"
+    },
+    {
+      "key": "invalid.invariants.invalid_approved_baseline",
+      "path": "invalid/invariants/invalid_approved_baseline.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:2257b0e0a982823f81c38600c2eafcf315d75972c332dd99cf09b3bb78a941d7"
+    },
+    {
+      "key": "invalid.invariants.lifecycle_phase_misalignment",
+      "path": "invalid/invariants/lifecycle_phase_misalignment.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:3ec127415512f07110a6c9dd11df5efcd6acef110b7944f89be9d8d74a950c3a"
+    },
+    {
+      "key": "invalid.invariants.uncontrolled_critical_risk",
+      "path": "invalid/invariants/uncontrolled_critical_risk.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:d2919a8909dfae123933e567b381076c07197b907144b8642d9d1528f7f62000"
+    },
+    {
+      "key": "invalid.invariants.unknown_selected_key",
+      "path": "invalid/invariants/unknown_selected_key.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:6bc85a8d0e347c350957337bf0c6025da9996b134195859dc6a7f98968f19fdf"
+    },
+    {
+      "key": "invalid.invariants.unsatisfied_dependency",
+      "path": "invalid/invariants/unsatisfied_dependency.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:2f7ff178509796fc107eb726d1a76d7e45f2cb860746b13c37d0b993a4e5bb89"
+    },
+    {
+      "key": "invalid.invariants.unsupported_configuration",
+      "path": "invalid/invariants/unsupported_configuration.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:f33b53e94aae0b39b5676e08b77233b6e8fab830038759ccc1f7db68662499d7"
+    },
+    {
+      "key": "invalid.invariants.untraceable_requirement",
+      "path": "invalid/invariants/untraceable_requirement.json",
+      "owner": "WP-K07",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:4f52bd827c2be45643c44f87854ea243eee1a8c40ebc0e6d2ab5412ccfaa89eb"
+    },
+    {
+      "key": "invalid.migrations.cases",
+      "path": "invalid/migrations/cases.json",
+      "owner": "WP-K10",
+      "fixture_class": "migration_failure",
+      "expected_primary": "FAILED",
+      "payload_fingerprint": "sha256:2258d301cb6a1aebbf52a4ca26b63300d790aaaf19798672da05418bd67525c1"
+    },
+    {
+      "key": "invalid.project_state.baseline_draft",
+      "path": "invalid/project_state/baseline_draft.json",
+      "owner": "WP-K03",
+      "fixture_class": "invalid_aggregate",
+      "expected_primary": "AGGREGATE_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:7191b7bda6ffdf8dd1ff834418833728a2ada40430a1c83b5f44be36155c2ab6"
+    },
+    {
+      "key": "invalid.project_state.baseline_missing",
+      "path": "invalid/project_state/baseline_missing.json",
+      "owner": "WP-K03",
+      "fixture_class": "invalid_aggregate",
+      "expected_primary": "AGGREGATE_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:7e26724bd84ab6ade6115f0fadd07d1efb7f93846e81e6a4255a9d427631ae2a"
+    },
+    {
+      "key": "invalid.project_state.dependency_self_reference",
+      "path": "invalid/project_state/dependency_self_reference.json",
+      "owner": "WP-K03",
+      "fixture_class": "invalid_aggregate",
+      "expected_primary": "AGGREGATE_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:705684740f4d30284902cdf2ebf72d73f2a9fe2daf1d0ce5f5d8067bccd3021e"
+    },
+    {
+      "key": "invalid.project_state.lifecycle_missing_phase",
+      "path": "invalid/project_state/lifecycle_missing_phase.json",
+      "owner": "WP-K03",
+      "fixture_class": "invalid_aggregate",
+      "expected_primary": "AGGREGATE_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:e551a9f83f480b2ad74ebac19301dc32c25a4cf9eeaa5ebcc900ca94e66b9a94"
+    },
+    {
+      "key": "invalid.project_state.registry_key_mismatch",
+      "path": "invalid/project_state/registry_key_mismatch.json",
+      "owner": "WP-K03",
+      "fixture_class": "invalid_aggregate",
+      "expected_primary": "AGGREGATE_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:946cab20745817deeca14c26dd5a766349b7892e8deac72ffa4e20065dd43eca"
+    },
+    {
+      "key": "invalid.project_state.requirement_missing_artifact",
+      "path": "invalid/project_state/requirement_missing_artifact.json",
+      "owner": "WP-K03",
+      "fixture_class": "invalid_aggregate",
+      "expected_primary": "AGGREGATE_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:70872be66c06687f63ad0ff65d0d58839812011d883468baded2754d8d4bceaf"
+    },
+    {
+      "key": "invalid.project_state.two_active_phases",
+      "path": "invalid/project_state/two_active_phases.json",
+      "owner": "WP-K03",
+      "fixture_class": "invalid_aggregate",
+      "expected_primary": "AGGREGATE_VALIDATION_FAILED",
+      "payload_fingerprint": "sha256:24c50e1cafa38323f982edef7cbfa72a135eaa37651af9289089e91a45c03b6c"
+    },
+    {
+      "key": "invalid.state_patch.add_existing",
+      "path": "invalid/state_patch/add_existing.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:75c5aec6bc76480ef038291dd95ec172111f032613a8be298bc962fdd66ca482"
+    },
+    {
+      "key": "invalid.state_patch.duplicate_operation",
+      "path": "invalid/state_patch/duplicate_operation.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:cd68b29ef1aea99955bf154e8ad596f2d291134a2b799916ad759b59c5ab3e70"
+    },
+    {
+      "key": "invalid.state_patch.invalid_path",
+      "path": "invalid/state_patch/invalid_path.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:9f2cb8b49fe36d20408f86691b2e3bb6826719611be7bfd3a7ed3e137f7a2710"
+    },
+    {
+      "key": "invalid.state_patch.invalid_target_value",
+      "path": "invalid/state_patch/invalid_target_value.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:5c977afee52f86d27deba03cb1855773d4f7795e7e60f7371173d86d7d8c41ec"
+    },
+    {
+      "key": "invalid.state_patch.registry_key_mismatch",
+      "path": "invalid/state_patch/registry_key_mismatch.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:78397c4204e1b70f30b70226f014c354e10b2634d1144e1f84f49938e43db57c"
+    },
+    {
+      "key": "invalid.state_patch.remove_required",
+      "path": "invalid/state_patch/remove_required.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:51c504b3efd3d75adaa1a8f376a2ef2801e2af997a575128a12069715df4fd39"
+    },
+    {
+      "key": "invalid.state_patch.replace_missing",
+      "path": "invalid/state_patch/replace_missing.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:88eb8adf98093921521efc522c461eb27a40a84f10f008831e82c5179937e735"
+    },
+    {
+      "key": "invalid.state_patch.scope_insufficient",
+      "path": "invalid/state_patch/scope_insufficient.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:f3ed4006fba05c4c64c8204f7444e8f754beb8dcbd8868abe927e3252b311465"
+    },
+    {
+      "key": "invalid.state_patch.scope_redundant",
+      "path": "invalid/state_patch/scope_redundant.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:f09c7d73db11b67a638af5e8587e8fa73626c576f119c87fcc33167438e16dc5"
+    },
+    {
+      "key": "invalid.state_patch.stale_object_version",
+      "path": "invalid/state_patch/stale_object_version.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:80c4e9fc58c1e94f7cb00557cb6a1be4dae613086815c2dabeee4e53c068047d"
+    },
+    {
+      "key": "invalid.state_patch.stale_state_fingerprint",
+      "path": "invalid/state_patch/stale_state_fingerprint.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:e858064d83c718346a5e8b606f58183324ea5b0df9af81c1d88654057fb2d3b0"
+    },
+    {
+      "key": "invalid.state_patch.stale_state_version",
+      "path": "invalid/state_patch/stale_state_version.json",
+      "owner": "WP-K05",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:906eea50bccf52b6fd2a290efd2595ed39b25054e9fd0d02031aa80d0175c1be"
+    },
+    {
+      "key": "invalid.transitions.invalid_cases",
+      "path": "invalid/transitions/invalid_cases.json",
+      "owner": "WP-K06",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:ba6a07bc307f70dd65772e496467d80ba7ce042f7c215a90a79f5e941c68af1a"
+    },
+    {
+      "key": "invalid.validation_pipeline.cases",
+      "path": "invalid/validation_pipeline/cases.json",
+      "owner": "WP-K08",
+      "fixture_class": "rejected_policy",
+      "expected_primary": "REJECTED",
+      "payload_fingerprint": "sha256:dc678cbdc8a19dbe77769ad011af11c0f6490003161751dc1e99110c9d70dcd9"
+    },
+    {
+      "key": "valid.base_models.fingerprint_semantics",
+      "path": "valid/base_models/fingerprint_semantics.json",
+      "owner": "WP-K02",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:1a0108e3fd0519520009c7bccffe2138d5458e049aac9fd1148add6124d2ca0d"
+    },
+    {
+      "key": "valid.contract_registry.breaking_major",
+      "path": "valid/contract_registry/breaking_major.json",
+      "owner": "WP-K09",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:47b616d60b74df94645248b834f44cba293af0451022964979582c0e0bc0e8c3"
+    },
+    {
+      "key": "valid.contract_registry.builtin_manifest",
+      "path": "valid/contract_registry/builtin_manifest.json",
+      "owner": "WP-K09",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:19d32184e7c48ef5c24b497139160b0992d19331a670099c7d00a6a5959597ab"
+    },
+    {
+      "key": "valid.contract_registry.canonical_schema_artifact",
+      "path": "valid/contract_registry/canonical_schema_artifact.json",
+      "owner": "WP-K09",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:000c3876e57a95aeace91ad303473bc8bde0b4c2ac89900abef20e070a86ce63"
+    },
+    {
+      "key": "valid.contract_registry.compatible_versions",
+      "path": "valid/contract_registry/compatible_versions.json",
+      "owner": "WP-K09",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:71809671dc8e93db60efded7e93a7643e3c31efe8f51bde58871f80f295b6f03"
+    },
+    {
+      "key": "valid.contract_registry.descriptor_with_alias",
+      "path": "valid/contract_registry/descriptor_with_alias.json",
+      "owner": "WP-K09",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:b5b7633c5199b68bf2249ab21d60ae43112af0ef18c5c0e486e61bca8248afd7"
+    },
+    {
+      "key": "valid.contract_registry.minimal_manifest",
+      "path": "valid/contract_registry/minimal_manifest.json",
+      "owner": "WP-K09",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:2864f50c371051385f78457886605c32af1a5f1fcca55bb0a7262ca079ad2a7f"
+    },
+    {
+      "key": "valid.event_envelope",
+      "path": "valid/event_envelope.json",
+      "owner": "WP-K04",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:214f875f897e9032f55a6bf580f4c5e17a6b198c7fde24db23f2092761d4c2e0"
+    },
+    {
+      "key": "valid.invariants.canonical_registry",
+      "path": "valid/invariants/canonical_registry.json",
+      "owner": "WP-K07",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:b3c30beb8e91e754adde4c2752caa53eeeab99e6052368314705275ae6176172"
+    },
+    {
+      "key": "valid.invariants.monotonic_snapshots",
+      "path": "valid/invariants/monotonic_snapshots.json",
+      "owner": "WP-K07",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:8c50f6dce3cff3c850e2fb90150df7e4f707da5248606b9f6f68589302a5e5c9"
+    },
+    {
+      "key": "valid.invariants.non_blocking_finding",
+      "path": "valid/invariants/non_blocking_finding.json",
+      "owner": "WP-K07",
+      "fixture_class": "non_blocking_finding",
+      "expected_primary": "ACCEPTED_WITH_FINDINGS",
+      "payload_fingerprint": "sha256:1af85b7aa5ca3508f810595eade30bbbc20e5bc569277ad2588fee91fb1acff9"
+    },
+    {
+      "key": "valid.invariants.ordered_history",
+      "path": "valid/invariants/ordered_history.json",
+      "owner": "WP-K07",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:6ded87f5e33c23a512222ace0b78609a03e89f41ab4485c7922f0b79677382a4"
+    },
+    {
+      "key": "valid.invariants.passing_context",
+      "path": "valid/invariants/passing_context.json",
+      "owner": "WP-K07",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:9f13fd45f4aff3b35e00658818a024c1f5b586461f532fd5422d8d29ee57ecfb"
+    },
+    {
+      "key": "valid.migrations.cases",
+      "path": "valid/migrations/cases.json",
+      "owner": "WP-K10",
+      "fixture_class": "migration_success",
+      "expected_primary": "SUCCEEDED",
+      "payload_fingerprint": "sha256:6ea3255fcc01394dcddbeb9a1970183de00fa266512af337a921052be8e929bb"
+    },
+    {
+      "key": "valid.minimal_project_state",
+      "path": "valid/minimal_project_state.json",
+      "owner": "WP-K03",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:9fbfc0a6c8debc7d2e6716b3a5661dedba7567a0d869405cc6e5d30c840df11a"
+    },
+    {
+      "key": "valid.primitives.canonical_ids",
+      "path": "valid/primitives/canonical_ids.json",
+      "owner": "WP-K01",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:605c8842492c5ca964f7dcdb820cb09ced8ccf29b51dd650297345dd821c8036"
+    },
+    {
+      "key": "valid.regression.catalog_baseline",
+      "path": "valid/regression/catalog_baseline.json",
+      "owner": "WP-K11",
+      "fixture_class": "regression",
+      "expected_primary": "FINGERPRINT_STABLE",
+      "payload_fingerprint": "sha256:d37fbbf1856c2356edd9af6e1f138aef28d76b38be053c25ab1d4144e88011de"
+    },
+    {
+      "key": "valid.state_patch.add_risk_record",
+      "path": "valid/state_patch/add_risk_record.json",
+      "owner": "WP-K05",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:8f0b70b300f34f252e20cacbe1fad1aecd03b19e182221be6da0533d82443ea5"
+    },
+    {
+      "key": "valid.state_patch.replace_project_profile",
+      "path": "valid/state_patch/replace_project_profile.json",
+      "owner": "WP-K05",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:6b54d7d08f532a1cc4da8daecdf54edf966e6851141c56d81a854fedc33a4480"
+    },
+    {
+      "key": "valid.state_patch.test_then_replace",
+      "path": "valid/state_patch/test_then_replace.json",
+      "owner": "WP-K05",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:75faaf91d9878657d2f08457f63b1c6e97dda93450f4748a9a9ff66c90da9ba3"
+    },
+    {
+      "key": "valid.transitions.artifact_approval_request",
+      "path": "valid/transitions/artifact_approval_request.json",
+      "owner": "WP-K06",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:d8fb22875c5157447259d70c47959d503fa620141e2e4f30da3b06c2e7d84e5f"
+    },
+    {
+      "key": "valid.transitions.canonical_registry",
+      "path": "valid/transitions/canonical_registry.json",
+      "owner": "WP-K06",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:c2f466a0dfa4c916729c0f054ff3fbd4b3207d953882df1ea347fa7128f35a6a"
+    },
+    {
+      "key": "valid.transitions.phase_activation_request",
+      "path": "valid/transitions/phase_activation_request.json",
+      "owner": "WP-K06",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:c2b978b43b1bda243b2f6474d4944fbc64226ddfbae2dbd55266d53576efcead"
+    },
+    {
+      "key": "valid.validation_pipeline.cases",
+      "path": "valid/validation_pipeline/cases.json",
+      "owner": "WP-K08",
+      "fixture_class": "valid",
+      "expected_primary": "VALID",
+      "payload_fingerprint": "sha256:04a8d408ceb27e3494a745f3adb0019628e3efab13e62b63c4750c72908edf93"
+    }
+  ],
+  "manifest_fingerprint": "sha256:f9e4950f415936d2760757a762944d7b5bc11d0dca238967e2561e8eadc37e2c"
+}

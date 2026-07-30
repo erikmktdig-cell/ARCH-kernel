@@ -1,0 +1,58 @@
+name: Release Check
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Exact v<version> candidate tag
+        required: false
+        type: string
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-check-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  SOURCE_DATE_EPOCH: "1784678400"
+  PYTHONHASHSEED: "0"
+  ARCH_KERNEL_NETWORK_AUDIT: "1"
+  ARCH_KERNEL_SOURCE_COMMIT: ${{ github.sha }}
+
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v9
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv sync --frozen --all-groups
+      - name: Resolve exact candidate tag
+        id: candidate
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Full fail-closed release check
+        run: uv run python scripts/check_release.py --tag "${{ steps.candidate.outputs.tag }}"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: arch-kernel-${{ steps.candidate.outputs.tag }}-candidate
+          path: dist/
+          if-no-files-found: warn

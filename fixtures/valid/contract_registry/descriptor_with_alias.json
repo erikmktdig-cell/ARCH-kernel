@@ -1,0 +1,6 @@
+{
+  "canonical_name": "arch.test.catalog_model",
+  "version": "1.0.0",
+  "alias": "arch.legacy.catalog_model",
+  "expected_resolution": "arch.test.catalog_model"
+}

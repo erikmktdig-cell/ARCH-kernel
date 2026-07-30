@@ -1,0 +1,73 @@
+[
+  {
+    "case": "duplicate_key",
+    "overrides": {
+      "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1T",
+      "transition_key": "artifact.approve",
+      "priority": 90
+    }
+  },
+  {
+    "case": "same_priority_ambiguity",
+    "overrides": {
+      "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1V",
+      "transition_key": "artifact.accept",
+      "priority": 100
+    }
+  },
+  {"case": "invalid_source_state", "overrides": {"from_states": ["invented"]}},
+  {"case": "invalid_destination_state", "overrides": {"to_state": "invented"}},
+  {
+    "case": "domain_id_mismatch",
+    "target": {
+      "domain": "artifact_status",
+      "entity_id": "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1B"
+    }
+  },
+  {
+    "case": "unsupported_placeholder",
+    "effect": {
+      "effect_type": "set_field",
+      "path_template": "/artifacts/{unknown}/status",
+      "value_source": "to_state"
+    }
+  },
+  {
+    "case": "invalid_guard_field_combination",
+    "guard": {
+      "guard_type": "field_equals",
+      "path": "/profile/project_type"
+    }
+  },
+  {
+    "case": "effect_outside_domain_scope",
+    "effect": {
+      "effect_type": "set_field",
+      "path_template": "/phases/{entity_id}/status",
+      "value_source": "to_state"
+    }
+  },
+  {
+    "case": "unauthorized_self_transition",
+    "overrides": {
+      "from_states": ["approved"],
+      "to_state": "approved",
+      "allow_self_transition": false
+    }
+  },
+  {
+    "case": "request_with_neither_selector",
+    "request_overrides": {"transition_key": null, "transition_id": null}
+  },
+  {
+    "case": "request_with_both_selectors",
+    "request_overrides": {
+      "transition_key": "artifact.approve",
+      "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1M"
+    }
+  },
+  {
+    "case": "stale_expected_source_state",
+    "request_overrides": {"expected_from_state": "draft"}
+  }
+]

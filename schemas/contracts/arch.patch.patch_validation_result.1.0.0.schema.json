@@ -1,0 +1,224 @@
+{
+  "$defs": {
+    "ErrorCode": {
+      "description": "Canonical error codes emitted by the contract kernel.",
+      "enum": [
+        "SCHEMA_VALIDATION_ERROR",
+        "UNKNOWN_FIELD",
+        "INVALID_ENUM_VALUE",
+        "INVALID_IDENTIFIER",
+        "INVALID_REFERENCE",
+        "REFERENCE_TYPE_MISMATCH",
+        "UNSUPPORTED_CONTRACT_VERSION",
+        "INVALID_EVENT_TYPE",
+        "INVALID_EVENT_TIMESTAMP_ORDER",
+        "INVALID_CAUSAL_REFERENCE",
+        "INVALID_IDEMPOTENCY_KEY",
+        "INVALID_EVENT_PAYLOAD",
+        "STALE_STATE_VERSION",
+        "STALE_OBJECT_VERSION",
+        "PATCH_SCOPE_VIOLATION",
+        "IMMUTABLE_RECORD_MODIFICATION",
+        "PATCH_TEST_FAILED",
+        "TRANSITION_NOT_FOUND",
+        "AMBIGUOUS_TRANSITION",
+        "TRANSITION_GUARD_FAILED",
+        "INVALID_TRANSITION_DEFINITION",
+        "UNSUPPORTED_TRANSITION_DOMAIN",
+        "DUPLICATE_INVARIANT_ID",
+        "DUPLICATE_INVARIANT_KEY",
+        "INVALID_INVARIANT_DEFINITION",
+        "INVARIANT_EVALUATION_ERROR",
+        "INVARIANT_VIOLATION",
+        "INVALID_VALIDATION_REQUEST",
+        "MISSING_TRANSITION_REGISTRY",
+        "MISSING_INVARIANT_REGISTRY",
+        "VALIDATION_STAGE_FAILED",
+        "VALIDATION_PIPELINE_INCONSISTENCY",
+        "DUPLICATE_CONTRACT_IDENTITY",
+        "DUPLICATE_CONTRACT_ALIAS",
+        "CONTRACT_ALIAS_COLLISION",
+        "CONTRACT_MODEL_MISMATCH",
+        "INVALID_CONTRACT_DESCRIPTOR",
+        "SCHEMA_GENERATION_FAILED",
+        "SCHEMA_PUBLICATION_FAILED",
+        "SCHEMA_COMPATIBILITY_UNKNOWN",
+        "INADEQUATE_VERSION_BUMP",
+        "DUPLICATE_MIGRATION_ID",
+        "DUPLICATE_MIGRATION_KEY",
+        "DUPLICATE_MIGRATION_EDGE",
+        "INVALID_MIGRATION_DEFINITION",
+        "MIGRATION_ENDPOINT_NOT_FOUND",
+        "MIGRATION_PATH_NOT_FOUND",
+        "AMBIGUOUS_MIGRATION_PATH",
+        "MIGRATION_POLICY_VIOLATION",
+        "MIGRATION_PRECONDITION_FAILED",
+        "MIGRATION_OPERATION_FAILED",
+        "MIGRATION_SOURCE_VALIDATION_FAILED",
+        "MIGRATION_TARGET_VALIDATION_FAILED",
+        "MIGRATION_SCHEMA_FINGERPRINT_MISMATCH",
+        "MIGRATION_REVERSIBILITY_INVALID",
+        "MIGRATION_AUDIT_FAILED"
+      ],
+      "title": "ErrorCode",
+      "type": "string"
+    },
+    "ErrorDetail": {
+      "additionalProperties": false,
+      "description": "Deterministic error payload suitable for future validation reports.",
+      "properties": {
+        "actual": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/JsonScalar"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "code": {
+          "$ref": "#/$defs/ErrorCode"
+        },
+        "entity_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entity Id"
+        },
+        "entity_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entity Type"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/JsonScalar"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "path": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PathSegment"
+          },
+          "title": "Path",
+          "type": "array"
+        },
+        "remediation_hint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remediation Hint"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity",
+          "default": "error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ErrorDetail",
+      "type": "object"
+    },
+    "JsonScalar": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "PathSegment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "Severity": {
+      "description": "Severity levels for structured errors.",
+      "enum": [
+        "info",
+        "warning",
+        "error",
+        "critical"
+      ],
+      "title": "Severity",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.patch.patch_validation_result/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Immutable deterministic validation report for a state patch.",
+  "properties": {
+    "errors": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ErrorDetail"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "is_valid": {
+      "title": "Is Valid",
+      "type": "boolean"
+    },
+    "warnings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ErrorDetail"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "is_valid"
+  ],
+  "title": "PatchValidationResult",
+  "type": "object"
+}

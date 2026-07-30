@@ -1,0 +1,17 @@
+{
+  "canonical_name": "arch.test.catalog_model",
+  "version": "1.0.0",
+  "schema_id": "https://schemas.arch.local/arch.test.catalog_model/1.0.0",
+  "filename": "contracts/arch.test.catalog_model.1.0.0.schema.json",
+  "normalized_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://schemas.arch.local/arch.test.catalog_model/1.0.0",
+    "additionalProperties": false,
+    "properties": {
+      "name": {"type": "string"}
+    },
+    "required": ["name"],
+    "title": "CatalogModel",
+    "type": "object"
+  }
+}

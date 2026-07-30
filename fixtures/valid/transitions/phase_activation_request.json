@@ -1,0 +1,16 @@
+{
+  "request_id": "CHG-01HZX7M3FQ1T2Q9V8Y6K4C2B1N",
+  "project_id": "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A",
+  "target": {
+    "domain": "phase_status",
+    "entity_id": "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1B"
+  },
+  "transition_key": "phase.activate",
+  "expected_from_state": "ready",
+  "base_state_record_version": 1,
+  "expected_state_content_fingerprint": null,
+  "expected_target_record_version": 1,
+  "expected_target_content_fingerprint": null,
+  "requested_at": "2026-07-25T18:00:00Z",
+  "metadata": {"source": "fixture"}
+}

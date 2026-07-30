@@ -1,0 +1,1 @@
+{"scenario":"changed_content_without_version_increment","kind":"monotonic_record_versions","record_versions":[1,1],"content_changed":true,"expected_violations":1}

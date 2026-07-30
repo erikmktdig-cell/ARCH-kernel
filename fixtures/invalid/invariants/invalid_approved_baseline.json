@@ -1,0 +1,1 @@
+{"scenario":"invalid_approved_baseline","kind":"approved_baseline_integrity","mutation":"baseline references absent artifact","expected_violations":1}

@@ -1,0 +1,1658 @@
+{
+  "$defs": {
+    "AnyCanonicalId": {
+      "anyOf": [
+        {
+          "examples": [
+            "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PRJ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ProjectId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PHX-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHX-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseExecutionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHS-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ArtifactId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RequirementId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "GATE-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^GATE-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "GateId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "GEX-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^GEX-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "GateExecutionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "APR-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^APR-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ApprovalId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "CHG-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^CHG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ChangeId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "EVT-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^EVT-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "EventId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "ASN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^ASN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "AssignmentId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PATCH-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PATCH-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PatchId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "DEC-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^DEC-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "DecisionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "RISK-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^RISK-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RiskId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^TRN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "TransitionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "INV-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^INV-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "InvariantId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "MIG-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^MIG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "MigrationId",
+          "type": "string"
+        }
+      ]
+    },
+    "ArtifactRecord": {
+      "additionalProperties": false,
+      "description": "Versioned metadata and traceability information for an artifact.",
+      "properties": {
+        "artifact_id": {
+          "examples": [
+            "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ArtifactId",
+          "type": "string"
+        },
+        "artifact_type": {
+          "title": "Artifact Type",
+          "type": "string"
+        },
+        "content_fingerprint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Fingerprint"
+        },
+        "content_uri": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Uri"
+        },
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "record_version": {
+          "minimum": 1,
+          "title": "Record Version",
+          "type": "integer"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "state_version_created": {
+          "minimum": 0,
+          "title": "State Version Created",
+          "type": "integer"
+        },
+        "state_version_updated": {
+          "minimum": 0,
+          "title": "State Version Updated",
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "#/$defs/ArtifactStatus"
+        },
+        "superseded_by": {
+          "anyOf": [
+            {
+              "examples": [
+                "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+              ],
+              "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+              "title": "ArtifactId",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Superseded By"
+        },
+        "supersedes": {
+          "anyOf": [
+            {
+              "examples": [
+                "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+              ],
+              "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+              "title": "ArtifactId",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        },
+        "version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "record_version",
+        "state_version_created",
+        "state_version_updated",
+        "artifact_id",
+        "name",
+        "artifact_type",
+        "status",
+        "owner",
+        "version"
+      ],
+      "title": "ArtifactRecord",
+      "type": "object"
+    },
+    "ArtifactStatus": {
+      "description": "Canonical artifact lifecycle status.",
+      "enum": [
+        "draft",
+        "proposed",
+        "under_review",
+        "changes_requested",
+        "conditionally_approved",
+        "approved",
+        "rejected",
+        "invalidated",
+        "superseded",
+        "archived"
+      ],
+      "title": "ArtifactStatus",
+      "type": "string"
+    },
+    "DecisionRecord": {
+      "additionalProperties": false,
+      "description": "Historical decision retained as a superficially immutable record.",
+      "properties": {
+        "context": {
+          "title": "Context",
+          "type": "string"
+        },
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "decided_at": {
+          "format": "date-time",
+          "title": "Decided At",
+          "type": "string"
+        },
+        "decided_by": {
+          "title": "Decided By",
+          "type": "string"
+        },
+        "decision": {
+          "title": "Decision",
+          "type": "string"
+        },
+        "decision_id": {
+          "examples": [
+            "DEC-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^DEC-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "DecisionId",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "related_artifact_ids": {
+          "items": {
+            "examples": [
+              "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+            ],
+            "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+            "title": "ArtifactId",
+            "type": "string"
+          },
+          "title": "Related Artifact Ids",
+          "type": "array"
+        },
+        "related_requirement_ids": {
+          "items": {
+            "examples": [
+              "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+            ],
+            "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+            "title": "RequirementId",
+            "type": "string"
+          },
+          "title": "Related Requirement Ids",
+          "type": "array"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "accepted",
+            "rejected",
+            "superseded"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "supersedes": {
+          "anyOf": [
+            {
+              "examples": [
+                "DEC-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+              ],
+              "pattern": "^DEC-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+              "title": "DecisionId",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "decision_id",
+        "title",
+        "context",
+        "decision",
+        "rationale",
+        "status",
+        "decided_by",
+        "decided_at"
+      ],
+      "title": "DecisionRecord",
+      "type": "object"
+    },
+    "DependencyEdge": {
+      "additionalProperties": false,
+      "description": "Directed, immutable dependency relationship between two references.",
+      "properties": {
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "dependency_type": {
+          "enum": [
+            "requires",
+            "produces",
+            "blocks",
+            "supersedes",
+            "validates",
+            "relates_to"
+          ],
+          "title": "Dependency Type",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/TypedReference"
+        },
+        "target": {
+          "$ref": "#/$defs/TypedReference"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "source",
+        "target",
+        "dependency_type",
+        "required"
+      ],
+      "title": "DependencyEdge",
+      "type": "object"
+    },
+    "EvidenceReference": {
+      "additionalProperties": false,
+      "description": "Immutable reference to evidence content without fetching or verifying it.",
+      "properties": {
+        "content_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Ref"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_id": {
+          "$ref": "#/$defs/AnyCanonicalId"
+        },
+        "evidence_type": {
+          "title": "Evidence Type",
+          "type": "string"
+        },
+        "fingerprint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fingerprint"
+        },
+        "uri": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uri"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "examples": [
+                "1.0.0",
+                "1.2.3-alpha.1",
+                "1.2.3-rc.1+sha.abc123"
+              ],
+              "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+              "title": "SemanticVersion",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "evidence_type"
+      ],
+      "title": "EvidenceReference",
+      "type": "object"
+    },
+    "LifecycleState": {
+      "additionalProperties": false,
+      "description": "Current lifecycle position without cross-record validation.",
+      "properties": {
+        "blocked_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Blocked Reason"
+        },
+        "completed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completed At"
+        },
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "current_phase_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PhaseCode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "current_phase_id": {
+          "anyOf": [
+            {
+              "examples": [
+                "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+              ],
+              "pattern": "^PHS-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+              "title": "PhaseId",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Current Phase Id"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Started At"
+        },
+        "status": {
+          "$ref": "#/$defs/PhaseStatus"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "current_phase_id",
+        "current_phase_code",
+        "status"
+      ],
+      "title": "LifecycleState",
+      "type": "object"
+    },
+    "PhaseCode": {
+      "description": "Canonical ARch phase codes.",
+      "enum": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F15"
+      ],
+      "title": "PhaseCode",
+      "type": "string"
+    },
+    "PhaseExecutionRecord": {
+      "additionalProperties": false,
+      "description": "Versioned execution record for an individual project phase.",
+      "properties": {
+        "artifact_ids": {
+          "items": {
+            "examples": [
+              "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+            ],
+            "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+            "title": "ArtifactId",
+            "type": "string"
+          },
+          "title": "Artifact Ids",
+          "type": "array"
+        },
+        "attempt": {
+          "minimum": 1,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "blocked_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Blocked Reason"
+        },
+        "completed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completed At"
+        },
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "phase_code": {
+          "$ref": "#/$defs/PhaseCode"
+        },
+        "phase_id": {
+          "examples": [
+            "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHS-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseId",
+          "type": "string"
+        },
+        "record_version": {
+          "minimum": 1,
+          "title": "Record Version",
+          "type": "integer"
+        },
+        "requirement_ids": {
+          "items": {
+            "examples": [
+              "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+            ],
+            "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+            "title": "RequirementId",
+            "type": "string"
+          },
+          "title": "Requirement Ids",
+          "type": "array"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Started At"
+        },
+        "state_version_created": {
+          "minimum": 0,
+          "title": "State Version Created",
+          "type": "integer"
+        },
+        "state_version_updated": {
+          "minimum": 0,
+          "title": "State Version Updated",
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "#/$defs/PhaseStatus"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "record_version",
+        "state_version_created",
+        "state_version_updated",
+        "phase_id",
+        "phase_code",
+        "status",
+        "attempt"
+      ],
+      "title": "PhaseExecutionRecord",
+      "type": "object"
+    },
+    "PhaseStatus": {
+      "description": "Canonical lifecycle status for phase execution.",
+      "enum": [
+        "not_started",
+        "eligible",
+        "ready",
+        "active",
+        "blocked",
+        "awaiting_approval",
+        "in_review",
+        "completed",
+        "completed_with_conditions",
+        "revalidation_pending",
+        "reopened",
+        "cancelled"
+      ],
+      "title": "PhaseStatus",
+      "type": "string"
+    },
+    "ProjectMetadata": {
+      "additionalProperties": false,
+      "description": "Human and system identifiers for a project aggregate.",
+      "properties": {
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "project_id": {
+          "examples": [
+            "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PRJ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ProjectId",
+          "type": "string"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "slug": {
+          "title": "Slug",
+          "type": "string"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "title": "Updated At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "updated_at",
+        "project_id",
+        "name",
+        "slug",
+        "owner"
+      ],
+      "title": "ProjectMetadata",
+      "type": "object"
+    },
+    "ProjectProfile": {
+      "additionalProperties": false,
+      "description": "Project categorization and immutable planning inputs.",
+      "properties": {
+        "constraints": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "criticality": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "title": "Criticality",
+          "type": "string"
+        },
+        "default_route": {
+          "$ref": "#/$defs/Route"
+        },
+        "objectives": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Objectives",
+          "type": "array"
+        },
+        "project_type": {
+          "title": "Project Type",
+          "type": "string"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "success_criteria": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Success Criteria",
+          "type": "array"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "project_type",
+        "criticality",
+        "default_route"
+      ],
+      "title": "ProjectProfile",
+      "type": "object"
+    },
+    "RequirementRecord": {
+      "additionalProperties": false,
+      "description": "Versioned requirement and its artifact traceability links.",
+      "properties": {
+        "acceptance_criteria": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Acceptance Criteria",
+          "type": "array"
+        },
+        "artifact_ids": {
+          "items": {
+            "examples": [
+              "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+            ],
+            "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+            "title": "ArtifactId",
+            "type": "string"
+          },
+          "title": "Artifact Ids",
+          "type": "array"
+        },
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "priority": {
+          "enum": [
+            "must",
+            "should",
+            "could",
+            "wont"
+          ],
+          "title": "Priority",
+          "type": "string"
+        },
+        "record_version": {
+          "minimum": 1,
+          "title": "Record Version",
+          "type": "integer"
+        },
+        "requirement_id": {
+          "examples": [
+            "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RequirementId",
+          "type": "string"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "state_version_created": {
+          "minimum": 0,
+          "title": "State Version Created",
+          "type": "integer"
+        },
+        "state_version_updated": {
+          "minimum": 0,
+          "title": "State Version Updated",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "accepted",
+            "implemented",
+            "verified",
+            "rejected",
+            "deferred"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "record_version",
+        "state_version_created",
+        "state_version_updated",
+        "requirement_id",
+        "title",
+        "description",
+        "priority",
+        "status"
+      ],
+      "title": "RequirementRecord",
+      "type": "object"
+    },
+    "RiskRecord": {
+      "additionalProperties": false,
+      "description": "Versioned project risk with a calculated, non-persisted score.",
+      "properties": {
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "impact": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Impact",
+          "type": "integer"
+        },
+        "mitigation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mitigation"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "probability": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Probability",
+          "type": "integer"
+        },
+        "record_version": {
+          "minimum": 1,
+          "title": "Record Version",
+          "type": "integer"
+        },
+        "related_artifact_ids": {
+          "items": {
+            "examples": [
+              "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+            ],
+            "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+            "title": "ArtifactId",
+            "type": "string"
+          },
+          "title": "Related Artifact Ids",
+          "type": "array"
+        },
+        "related_requirement_ids": {
+          "items": {
+            "examples": [
+              "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+            ],
+            "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+            "title": "RequirementId",
+            "type": "string"
+          },
+          "title": "Related Requirement Ids",
+          "type": "array"
+        },
+        "risk_id": {
+          "examples": [
+            "RISK-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^RISK-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RiskId",
+          "type": "string"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "state_version_created": {
+          "minimum": 0,
+          "title": "State Version Created",
+          "type": "integer"
+        },
+        "state_version_updated": {
+          "minimum": 0,
+          "title": "State Version Updated",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "open",
+            "mitigating",
+            "accepted",
+            "closed",
+            "materialized"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "record_version",
+        "state_version_created",
+        "state_version_updated",
+        "risk_id",
+        "title",
+        "description",
+        "probability",
+        "impact",
+        "status",
+        "owner"
+      ],
+      "title": "RiskRecord",
+      "type": "object"
+    },
+    "Route": {
+      "description": "Canonical ARch routing modes.",
+      "enum": [
+        "quick",
+        "standard",
+        "critical"
+      ],
+      "title": "Route",
+      "type": "string"
+    },
+    "TypedReference": {
+      "additionalProperties": false,
+      "description": "Immutable reference to another canonical object without resolving it.",
+      "properties": {
+        "relation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Relation"
+        },
+        "target_id": {
+          "$ref": "#/$defs/AnyCanonicalId"
+        },
+        "target_type": {
+          "title": "Target Type",
+          "type": "string"
+        },
+        "target_version": {
+          "anyOf": [
+            {
+              "examples": [
+                "1.0.0",
+                "1.2.3-alpha.1",
+                "1.2.3-rc.1+sha.abc123"
+              ],
+              "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+              "title": "SemanticVersion",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Version"
+        }
+      },
+      "required": [
+        "target_type",
+        "target_id"
+      ],
+      "title": "TypedReference",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.project.project_state/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Minimal project aggregate with deterministic intra-aggregate validation.",
+  "properties": {
+    "active_baseline_artifact_ids": {
+      "items": {
+        "examples": [
+          "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+        ],
+        "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+        "title": "ArtifactId",
+        "type": "string"
+      },
+      "title": "Active Baseline Artifact Ids",
+      "type": "array"
+    },
+    "artifact_registry": {
+      "patternProperties": {
+        "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$": {
+          "$ref": "#/$defs/ArtifactRecord"
+        }
+      },
+      "propertyNames": {
+        "examples": [
+          "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+        ]
+      },
+      "title": "Artifact Registry",
+      "type": "object"
+    },
+    "contract_name": {
+      "title": "Contract Name",
+      "type": "string"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "decision_log": {
+      "items": {
+        "$ref": "#/$defs/DecisionRecord"
+      },
+      "title": "Decision Log",
+      "type": "array"
+    },
+    "dependency_graph": {
+      "items": {
+        "$ref": "#/$defs/DependencyEdge"
+      },
+      "title": "Dependency Graph",
+      "type": "array"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/LifecycleState"
+    },
+    "metadata": {
+      "$ref": "#/$defs/ProjectMetadata"
+    },
+    "open_items": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Open Items",
+      "type": "array"
+    },
+    "phase_execution_records": {
+      "patternProperties": {
+        "^PHS-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$": {
+          "$ref": "#/$defs/PhaseExecutionRecord"
+        }
+      },
+      "propertyNames": {
+        "examples": [
+          "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+        ]
+      },
+      "title": "Phase Execution Records",
+      "type": "object"
+    },
+    "profile": {
+      "$ref": "#/$defs/ProjectProfile"
+    },
+    "record_version": {
+      "minimum": 1,
+      "title": "Record Version",
+      "type": "integer"
+    },
+    "requirement_registry": {
+      "patternProperties": {
+        "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$": {
+          "$ref": "#/$defs/RequirementRecord"
+        }
+      },
+      "propertyNames": {
+        "examples": [
+          "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+        ]
+      },
+      "title": "Requirement Registry",
+      "type": "object"
+    },
+    "risk_registry": {
+      "patternProperties": {
+        "^RISK-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$": {
+          "$ref": "#/$defs/RiskRecord"
+        }
+      },
+      "propertyNames": {
+        "examples": [
+          "RISK-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+        ]
+      },
+      "title": "Risk Registry",
+      "type": "object"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "state_version_created": {
+      "minimum": 0,
+      "title": "State Version Created",
+      "type": "integer"
+    },
+    "state_version_updated": {
+      "minimum": 0,
+      "title": "State Version Updated",
+      "type": "integer"
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated At"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "schema_uri",
+    "created_at",
+    "record_version",
+    "state_version_created",
+    "state_version_updated",
+    "metadata",
+    "profile",
+    "lifecycle"
+  ],
+  "title": "ProjectState",
+  "type": "object"
+}

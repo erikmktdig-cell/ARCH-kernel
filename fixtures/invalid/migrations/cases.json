@@ -1,0 +1,30 @@
+{
+  "fixture_set": "wp-k10-invalid-migrations",
+  "cases": [
+    {"name": "duplicate-id", "error": "DUPLICATE_MIGRATION_ID"},
+    {"name": "duplicate-key", "error": "DUPLICATE_MIGRATION_KEY"},
+    {"name": "duplicate-edge", "error": "DUPLICATE_MIGRATION_EDGE"},
+    {"name": "missing-source-endpoint", "error": "MIGRATION_ENDPOINT_NOT_FOUND"},
+    {"name": "missing-target-endpoint", "error": "MIGRATION_ENDPOINT_NOT_FOUND"},
+    {"name": "stale-source-schema-fingerprint", "error": "MIGRATION_SCHEMA_FINGERPRINT_MISMATCH"},
+    {"name": "stale-target-schema-fingerprint", "error": "MIGRATION_SCHEMA_FINGERPRINT_MISMATCH"},
+    {"name": "invalid-direction", "error": "INVALID_MIGRATION_DEFINITION"},
+    {"name": "empty-non-identity", "error": "INVALID_MIGRATION_DEFINITION"},
+    {"name": "identity-with-operations", "error": "INVALID_MIGRATION_DEFINITION"},
+    {"name": "missing-reverse-id", "error": "MIGRATION_REVERSIBILITY_INVALID"},
+    {"name": "missing-reverse-edge", "error": "MIGRATION_REVERSIBILITY_INVALID"},
+    {"name": "non-reciprocal-reverse-edge", "error": "MIGRATION_REVERSIBILITY_INVALID"},
+    {"name": "unsafe-path", "error": "INVALID_MIGRATION_DEFINITION"},
+    {"name": "invalid-operation-shape", "error": "INVALID_MIGRATION_DEFINITION"},
+    {"name": "source-validation-failure", "error": "MIGRATION_SOURCE_VALIDATION_FAILED"},
+    {"name": "target-validation-failure", "error": "MIGRATION_TARGET_VALIDATION_FAILED"},
+    {"name": "operation-precondition-failure", "error": "MIGRATION_PRECONDITION_FAILED"},
+    {"name": "operation-execution-failure", "error": "MIGRATION_OPERATION_FAILED"},
+    {"name": "no-path", "error": "MIGRATION_PATH_NOT_FOUND"},
+    {"name": "ambiguous-path", "error": "AMBIGUOUS_MIGRATION_PATH"},
+    {"name": "downgrade-disabled", "error": "MIGRATION_POLICY_VIOLATION"},
+    {"name": "deprecated-disabled", "error": "MIGRATION_PATH_NOT_FOUND"},
+    {"name": "maximum-steps-exceeded", "error": "MIGRATION_POLICY_VIOLATION"},
+    {"name": "stale-registry-fingerprint", "error": "MIGRATION_PRECONDITION_FAILED"}
+  ]
+}

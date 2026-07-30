@@ -1,0 +1,9 @@
+{
+  "scenario": "canonical_typed_id_round_trip",
+  "ids": [
+    "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A",
+    "EVT-01HZX7M3FQ1T2Q9V8Y6K4C2B1F",
+    "MIG-01ARZ3NDEKTSV4RRFFQ69G5FAV"
+  ],
+  "expected": "parse_format_identity"
+}

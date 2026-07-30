@@ -1,0 +1,6 @@
+{
+  "scenario": "builtin_contract_catalog_baseline",
+  "contract_count": 35,
+  "catalog_fingerprint": "sha256:72ebb7a790a1c6f0b92d15601a293c280429d20d3d0e5a10bab5525499a72ae0",
+  "expected": "fingerprint_stable"
+}

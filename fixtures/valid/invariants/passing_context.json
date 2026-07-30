@@ -1,0 +1,5 @@
+{
+  "state_fixture": "../minimal_project_state.json",
+  "evaluated_at": "2026-07-25T19:00:00Z",
+  "expected_blocking_violations": 0
+}

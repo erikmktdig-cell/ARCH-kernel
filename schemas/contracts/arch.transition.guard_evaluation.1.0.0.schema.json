@@ -1,0 +1,537 @@
+{
+  "$defs": {
+    "AnyCanonicalId": {
+      "anyOf": [
+        {
+          "examples": [
+            "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PRJ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ProjectId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PHX-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHX-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseExecutionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHS-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ArtifactId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RequirementId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "GATE-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^GATE-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "GateId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "GEX-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^GEX-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "GateExecutionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "APR-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^APR-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ApprovalId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "CHG-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^CHG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ChangeId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "EVT-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^EVT-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "EventId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "ASN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^ASN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "AssignmentId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PATCH-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PATCH-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PatchId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "DEC-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^DEC-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "DecisionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "RISK-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^RISK-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RiskId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^TRN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "TransitionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "INV-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^INV-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "InvariantId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "MIG-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^MIG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "MigrationId",
+          "type": "string"
+        }
+      ]
+    },
+    "ErrorCode": {
+      "description": "Canonical error codes emitted by the contract kernel.",
+      "enum": [
+        "SCHEMA_VALIDATION_ERROR",
+        "UNKNOWN_FIELD",
+        "INVALID_ENUM_VALUE",
+        "INVALID_IDENTIFIER",
+        "INVALID_REFERENCE",
+        "REFERENCE_TYPE_MISMATCH",
+        "UNSUPPORTED_CONTRACT_VERSION",
+        "INVALID_EVENT_TYPE",
+        "INVALID_EVENT_TIMESTAMP_ORDER",
+        "INVALID_CAUSAL_REFERENCE",
+        "INVALID_IDEMPOTENCY_KEY",
+        "INVALID_EVENT_PAYLOAD",
+        "STALE_STATE_VERSION",
+        "STALE_OBJECT_VERSION",
+        "PATCH_SCOPE_VIOLATION",
+        "IMMUTABLE_RECORD_MODIFICATION",
+        "PATCH_TEST_FAILED",
+        "TRANSITION_NOT_FOUND",
+        "AMBIGUOUS_TRANSITION",
+        "TRANSITION_GUARD_FAILED",
+        "INVALID_TRANSITION_DEFINITION",
+        "UNSUPPORTED_TRANSITION_DOMAIN",
+        "DUPLICATE_INVARIANT_ID",
+        "DUPLICATE_INVARIANT_KEY",
+        "INVALID_INVARIANT_DEFINITION",
+        "INVARIANT_EVALUATION_ERROR",
+        "INVARIANT_VIOLATION",
+        "INVALID_VALIDATION_REQUEST",
+        "MISSING_TRANSITION_REGISTRY",
+        "MISSING_INVARIANT_REGISTRY",
+        "VALIDATION_STAGE_FAILED",
+        "VALIDATION_PIPELINE_INCONSISTENCY",
+        "DUPLICATE_CONTRACT_IDENTITY",
+        "DUPLICATE_CONTRACT_ALIAS",
+        "CONTRACT_ALIAS_COLLISION",
+        "CONTRACT_MODEL_MISMATCH",
+        "INVALID_CONTRACT_DESCRIPTOR",
+        "SCHEMA_GENERATION_FAILED",
+        "SCHEMA_PUBLICATION_FAILED",
+        "SCHEMA_COMPATIBILITY_UNKNOWN",
+        "INADEQUATE_VERSION_BUMP",
+        "DUPLICATE_MIGRATION_ID",
+        "DUPLICATE_MIGRATION_KEY",
+        "DUPLICATE_MIGRATION_EDGE",
+        "INVALID_MIGRATION_DEFINITION",
+        "MIGRATION_ENDPOINT_NOT_FOUND",
+        "MIGRATION_PATH_NOT_FOUND",
+        "AMBIGUOUS_MIGRATION_PATH",
+        "MIGRATION_POLICY_VIOLATION",
+        "MIGRATION_PRECONDITION_FAILED",
+        "MIGRATION_OPERATION_FAILED",
+        "MIGRATION_SOURCE_VALIDATION_FAILED",
+        "MIGRATION_TARGET_VALIDATION_FAILED",
+        "MIGRATION_SCHEMA_FINGERPRINT_MISMATCH",
+        "MIGRATION_REVERSIBILITY_INVALID",
+        "MIGRATION_AUDIT_FAILED"
+      ],
+      "title": "ErrorCode",
+      "type": "string"
+    },
+    "ErrorDetail": {
+      "additionalProperties": false,
+      "description": "Deterministic error payload suitable for future validation reports.",
+      "properties": {
+        "actual": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/JsonScalar"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "code": {
+          "$ref": "#/$defs/ErrorCode"
+        },
+        "entity_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entity Id"
+        },
+        "entity_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entity Type"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/JsonScalar"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "path": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PathSegment"
+          },
+          "title": "Path",
+          "type": "array"
+        },
+        "remediation_hint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remediation Hint"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity",
+          "default": "error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ErrorDetail",
+      "type": "object"
+    },
+    "GuardType": {
+      "description": "Declarative guard operations supported by K06.",
+      "enum": [
+        "field_equals",
+        "field_not_equals",
+        "field_in",
+        "field_exists",
+        "field_absent",
+        "reference_exists",
+        "no_active_phase_except_target",
+        "all_dependencies_satisfied"
+      ],
+      "title": "GuardType",
+      "type": "string"
+    },
+    "JsonScalar": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "PathSegment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "Severity": {
+      "description": "Severity levels for structured errors.",
+      "enum": [
+        "info",
+        "warning",
+        "error",
+        "critical"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "TransitionGuard": {
+      "additionalProperties": false,
+      "description": "One declarative, side-effect-free transition precondition.",
+      "properties": {
+        "allowed_values": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/TransitionJsonValue"
+          },
+          "title": "Allowed Values",
+          "type": "array"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TransitionJsonValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "guard_type": {
+          "$ref": "#/$defs/GuardType"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "examples": [
+                "/artifacts/ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1C"
+              ],
+              "pattern": "^/[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*$",
+              "title": "PatchPath",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "reference": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TypedReference"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "guard_type"
+      ],
+      "title": "TransitionGuard",
+      "type": "object"
+    },
+    "TransitionJsonValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "TypedReference": {
+      "additionalProperties": false,
+      "description": "Immutable reference to another canonical object without resolving it.",
+      "properties": {
+        "relation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Relation"
+        },
+        "target_id": {
+          "$ref": "#/$defs/AnyCanonicalId"
+        },
+        "target_type": {
+          "title": "Target Type",
+          "type": "string"
+        },
+        "target_version": {
+          "anyOf": [
+            {
+              "examples": [
+                "1.0.0",
+                "1.2.3-alpha.1",
+                "1.2.3-rc.1+sha.abc123"
+              ],
+              "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+              "title": "SemanticVersion",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Version"
+        }
+      },
+      "required": [
+        "target_type",
+        "target_id"
+      ],
+      "title": "TypedReference",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.transition.guard_evaluation/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Structured outcome for one guard in declaration order.",
+  "properties": {
+    "actual": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TransitionJsonValue"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ErrorDetail"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "guard": {
+      "$ref": "#/$defs/TransitionGuard"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "guard",
+    "passed"
+  ],
+  "title": "GuardEvaluation",
+  "type": "object"
+}

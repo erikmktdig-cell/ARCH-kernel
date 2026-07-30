@@ -1,0 +1,16 @@
+{
+  "request_id": "PATCH-01HZX7M3FQ1T2Q9V8Y6K4C2B1K",
+  "project_id": "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A",
+  "target": {
+    "domain": "artifact_status",
+    "entity_id": "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1C"
+  },
+  "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1R",
+  "expected_from_state": "under_review",
+  "base_state_record_version": 1,
+  "expected_state_content_fingerprint": null,
+  "expected_target_record_version": 1,
+  "expected_target_content_fingerprint": null,
+  "requested_at": "2026-07-25T18:00:00+00:00",
+  "metadata": {"source": "fixture"}
+}

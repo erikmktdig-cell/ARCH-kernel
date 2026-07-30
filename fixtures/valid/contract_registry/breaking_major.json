@@ -1,0 +1,6 @@
+{
+  "canonical_name": "arch.test.catalog_model",
+  "versions": ["1.0.0", "2.0.0"],
+  "change": "required_property_added",
+  "minimum_bump": "major"
+}

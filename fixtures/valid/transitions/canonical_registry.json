@@ -1,0 +1,130 @@
+[
+  {
+    "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1M",
+    "name": "Activate phase",
+    "transition_key": "phase.activate",
+    "contract_version": "1.0.0",
+    "domain": "phase_status",
+    "from_states": ["ready", "reopened"],
+    "to_state": "active",
+    "guards": [
+      {"guard_type": "no_active_phase_except_target"}
+    ],
+    "effects": [
+      {
+        "effect_type": "set_field",
+        "path_template": "/phases/{entity_id}/status",
+        "value_source": "to_state"
+      }
+    ],
+    "priority": 100,
+    "allow_self_transition": false,
+    "description": "Activate an eligible phase execution.",
+    "metadata": {"work_package": "WP-K06"}
+  },
+  {
+    "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1N",
+    "name": "Block phase",
+    "transition_key": "phase.block",
+    "contract_version": "1.0.0",
+    "domain": "phase_status",
+    "from_states": ["ready", "active"],
+    "to_state": "blocked",
+    "guards": [],
+    "effects": [
+      {
+        "effect_type": "set_field",
+        "path_template": "/phases/{entity_id}/status",
+        "value_source": "to_state"
+      }
+    ],
+    "priority": 100,
+    "allow_self_transition": false,
+    "description": "Block a phase; aggregate validation still requires a reason.",
+    "metadata": {"work_package": "WP-K06"}
+  },
+  {
+    "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1P",
+    "name": "Complete phase",
+    "transition_key": "phase.complete",
+    "contract_version": "1.0.0",
+    "domain": "phase_status",
+    "from_states": ["awaiting_approval", "in_review"],
+    "to_state": "completed",
+    "guards": [],
+    "effects": [
+      {
+        "effect_type": "set_field",
+        "path_template": "/phases/{entity_id}/status",
+        "value_source": "to_state"
+      }
+    ],
+    "priority": 100,
+    "allow_self_transition": false,
+    "description": "Complete a reviewed phase.",
+    "metadata": {"work_package": "WP-K06"}
+  },
+  {
+    "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1Q",
+    "name": "Submit artifact for review",
+    "transition_key": "artifact.submit_for_review",
+    "contract_version": "1.0.0",
+    "domain": "artifact_status",
+    "from_states": ["draft", "proposed", "changes_requested"],
+    "to_state": "under_review",
+    "guards": [],
+    "effects": [
+      {
+        "effect_type": "set_field",
+        "path_template": "/artifacts/{entity_id}/status",
+        "value_source": "to_state"
+      }
+    ],
+    "priority": 100,
+    "allow_self_transition": false,
+    "description": "Submit an artifact for review.",
+    "metadata": {"work_package": "WP-K06"}
+  },
+  {
+    "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1R",
+    "name": "Approve artifact",
+    "transition_key": "artifact.approve",
+    "contract_version": "1.0.0",
+    "domain": "artifact_status",
+    "from_states": ["under_review"],
+    "to_state": "approved",
+    "guards": [],
+    "effects": [
+      {
+        "effect_type": "set_field",
+        "path_template": "/artifacts/{entity_id}/status",
+        "value_source": "to_state"
+      }
+    ],
+    "priority": 100,
+    "allow_self_transition": false,
+    "description": "Approve a reviewed artifact.",
+    "metadata": {"work_package": "WP-K06"}
+  },
+  {
+    "transition_id": "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1S",
+    "name": "Reject artifact",
+    "transition_key": "artifact.reject",
+    "contract_version": "1.0.0",
+    "domain": "artifact_status",
+    "from_states": ["under_review"],
+    "to_state": "rejected",
+    "guards": [],
+    "effects": [
+      {
+        "effect_type": "set_field",
+        "path_template": "/artifacts/{entity_id}/status",
+        "value_source": "to_state"
+      }
+    ],
+    "priority": 100,
+    "allow_self_transition": false,
+    "description": "Reject a reviewed artifact.",
+    "metadata": {"work_package": "WP-K06"}
+  }
+]

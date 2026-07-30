@@ -1,0 +1,166 @@
+{
+  "$defs": {
+    "InvariantKind": {
+      "description": "Closed canonical implementations supported by the K07 engine.",
+      "enum": [
+        "single_active_phase",
+        "lifecycle_phase_alignment",
+        "approved_baseline_integrity",
+        "required_dependency_satisfaction",
+        "requirement_traceability",
+        "critical_risk_control",
+        "terminal_phase_consistency",
+        "immutable_history_consistency",
+        "monotonic_record_versions"
+      ],
+      "title": "InvariantKind",
+      "type": "string"
+    },
+    "InvariantScope": {
+      "description": "Closed scopes available for deterministic invariant selection.",
+      "enum": [
+        "project",
+        "lifecycle",
+        "phase",
+        "artifact",
+        "requirement",
+        "risk",
+        "dependency",
+        "history"
+      ],
+      "title": "InvariantScope",
+      "type": "string"
+    },
+    "InvariantSeverity": {
+      "description": "Policy severity, independent from diagnostic transport severity.",
+      "enum": [
+        "info",
+        "warning",
+        "error",
+        "critical"
+      ],
+      "title": "InvariantSeverity",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.invariant.invariant_definition/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Immutable declaration that selects one closed invariant evaluator.",
+  "properties": {
+    "blocking": {
+      "title": "Blocking",
+      "type": "boolean"
+    },
+    "configuration": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "array"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      },
+      "title": "FrozenJsonObject",
+      "type": "object"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "enabled": {
+      "default": true,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "invariant_id": {
+      "examples": [
+        "INV-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+      ],
+      "pattern": "^INV-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "title": "InvariantId",
+      "type": "string"
+    },
+    "key": {
+      "title": "Key",
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/InvariantKind"
+    },
+    "priority": {
+      "maximum": 10000,
+      "minimum": -10000,
+      "title": "Priority",
+      "type": "integer"
+    },
+    "remediation_hint": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Remediation Hint"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/InvariantScope"
+    },
+    "severity": {
+      "$ref": "#/$defs/InvariantSeverity"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "invariant_id",
+    "key",
+    "title",
+    "description",
+    "kind",
+    "scope",
+    "severity",
+    "blocking",
+    "priority",
+    "contract_version",
+    "schema_uri"
+  ],
+  "title": "InvariantDefinition",
+  "type": "object"
+}

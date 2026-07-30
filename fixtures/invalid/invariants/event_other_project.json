@@ -1,0 +1,1 @@
+{"scenario":"event_from_another_project","kind":"immutable_history_consistency","mutation":"event.project_id differs","expected_violations":1}

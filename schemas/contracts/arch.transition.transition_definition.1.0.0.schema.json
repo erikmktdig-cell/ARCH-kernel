@@ -1,0 +1,509 @@
+{
+  "$defs": {
+    "AnyCanonicalId": {
+      "anyOf": [
+        {
+          "examples": [
+            "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PRJ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ProjectId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PHX-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHX-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseExecutionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHS-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ArtifactId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RequirementId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "GATE-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^GATE-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "GateId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "GEX-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^GEX-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "GateExecutionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "APR-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^APR-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ApprovalId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "CHG-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^CHG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ChangeId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "EVT-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^EVT-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "EventId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "ASN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^ASN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "AssignmentId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PATCH-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PATCH-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PatchId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "DEC-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^DEC-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "DecisionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "RISK-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^RISK-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RiskId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^TRN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "TransitionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "INV-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^INV-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "InvariantId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "MIG-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^MIG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "MigrationId",
+          "type": "string"
+        }
+      ]
+    },
+    "EffectType": {
+      "description": "Declarative effects that map directly to K05 operations.",
+      "enum": [
+        "set_field",
+        "remove_field",
+        "assert_field"
+      ],
+      "title": "EffectType",
+      "type": "string"
+    },
+    "EffectValueSource": {
+      "description": "Closed sources from which an effect value may be rendered.",
+      "enum": [
+        "literal",
+        "to_state",
+        "evaluated_at",
+        "entity_id"
+      ],
+      "title": "EffectValueSource",
+      "type": "string"
+    },
+    "GuardType": {
+      "description": "Declarative guard operations supported by K06.",
+      "enum": [
+        "field_equals",
+        "field_not_equals",
+        "field_in",
+        "field_exists",
+        "field_absent",
+        "reference_exists",
+        "no_active_phase_except_target",
+        "all_dependencies_satisfied"
+      ],
+      "title": "GuardType",
+      "type": "string"
+    },
+    "TransitionDomain": {
+      "description": "Closed domain names admitted by transition definitions.",
+      "enum": [
+        "project_lifecycle",
+        "phase_status",
+        "artifact_status",
+        "approval_decision",
+        "risk_status",
+        "requirement_status"
+      ],
+      "title": "TransitionDomain",
+      "type": "string"
+    },
+    "TransitionEffect": {
+      "additionalProperties": false,
+      "description": "One ordered effect rendered into a K05 patch operation.",
+      "properties": {
+        "effect_type": {
+          "$ref": "#/$defs/EffectType"
+        },
+        "literal_value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TransitionJsonValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "path_template": {
+          "title": "Path Template",
+          "type": "string"
+        },
+        "value_source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EffectValueSource"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "effect_type",
+        "path_template"
+      ],
+      "title": "TransitionEffect",
+      "type": "object"
+    },
+    "TransitionGuard": {
+      "additionalProperties": false,
+      "description": "One declarative, side-effect-free transition precondition.",
+      "properties": {
+        "allowed_values": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/TransitionJsonValue"
+          },
+          "title": "Allowed Values",
+          "type": "array"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TransitionJsonValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "guard_type": {
+          "$ref": "#/$defs/GuardType"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "examples": [
+                "/artifacts/ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1C"
+              ],
+              "pattern": "^/[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*$",
+              "title": "PatchPath",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "reference": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TypedReference"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "guard_type"
+      ],
+      "title": "TransitionGuard",
+      "type": "object"
+    },
+    "TransitionJsonValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "TypedReference": {
+      "additionalProperties": false,
+      "description": "Immutable reference to another canonical object without resolving it.",
+      "properties": {
+        "relation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Relation"
+        },
+        "target_id": {
+          "$ref": "#/$defs/AnyCanonicalId"
+        },
+        "target_type": {
+          "title": "Target Type",
+          "type": "string"
+        },
+        "target_version": {
+          "anyOf": [
+            {
+              "examples": [
+                "1.0.0",
+                "1.2.3-alpha.1",
+                "1.2.3-rc.1+sha.abc123"
+              ],
+              "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+              "title": "SemanticVersion",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Version"
+        }
+      },
+      "required": [
+        "target_type",
+        "target_id"
+      ],
+      "title": "TypedReference",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.transition.transition_definition/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Versioned immutable declaration of one state transition.",
+  "properties": {
+    "allow_self_transition": {
+      "default": false,
+      "title": "Allow Self Transition",
+      "type": "boolean"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Description"
+    },
+    "domain": {
+      "$ref": "#/$defs/TransitionDomain"
+    },
+    "effects": {
+      "items": {
+        "$ref": "#/$defs/TransitionEffect"
+      },
+      "minItems": 1,
+      "title": "Effects",
+      "type": "array"
+    },
+    "from_states": {
+      "items": {
+        "type": "string"
+      },
+      "title": "From States",
+      "type": "array"
+    },
+    "guards": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TransitionGuard"
+      },
+      "title": "Guards",
+      "type": "array"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "array"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      },
+      "title": "FrozenJsonObject",
+      "type": "object"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "priority": {
+      "default": 100,
+      "maximum": 10000,
+      "minimum": -10000,
+      "title": "Priority",
+      "type": "integer"
+    },
+    "to_state": {
+      "title": "To State",
+      "type": "string"
+    },
+    "transition_id": {
+      "examples": [
+        "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+      ],
+      "pattern": "^TRN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "title": "TransitionId",
+      "type": "string"
+    },
+    "transition_key": {
+      "title": "Transition Key",
+      "type": "string"
+    }
+  },
+  "required": [
+    "transition_id",
+    "name",
+    "transition_key",
+    "contract_version",
+    "domain",
+    "from_states",
+    "to_state",
+    "effects"
+  ],
+  "title": "TransitionDefinition",
+  "type": "object"
+}

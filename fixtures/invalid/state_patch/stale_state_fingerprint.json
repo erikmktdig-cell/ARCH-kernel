@@ -1,0 +1,12 @@
+{
+  "contract_name": "state_patch", "contract_version": "1.0.0",
+  "schema_uri": "urn:arch:contracts:state_patch:1.0.0",
+  "created_at": "2026-07-23T13:00:00Z",
+  "patch_id": "PATCH-01HZX7M3FQ1T2Q9V8Y6K4C2B1K",
+  "project_id": "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A",
+  "base_state_record_version": 1,
+  "base_state_content_fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "operations": [{"op": "test", "path": "/profile/project_type", "value": "platform"}],
+  "created_by": {"contract_name": "event_actor", "contract_version": "1.0.0", "schema_uri": "urn:arch:contracts:event_actor:1.0.0", "created_at": "2026-07-23T13:00:00Z", "actor_type": "human", "actor_id": "platform-engineer"},
+  "scope": ["/profile"]
+}

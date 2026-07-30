@@ -1,0 +1,14 @@
+{
+  "fixture_set": "wp-k10-valid-migrations",
+  "cases": [
+    {"name": "identity-noop", "expect": "not_required"},
+    {"name": "single-step-upgrade", "expect": "succeeded"},
+    {"name": "multi-step-upgrade", "expect": "succeeded"},
+    {"name": "explicit-downgrade", "expect": "succeeded"},
+    {"name": "lossless-route", "expect": "succeeded"},
+    {"name": "reversible-round-trip", "expect": "succeeded"},
+    {"name": "all-operation-types", "expect": "succeeded"},
+    {"name": "intermediate-validation", "expect": "succeeded"},
+    {"name": "stable-plan-and-result-fingerprints", "expect": "succeeded"}
+  ]
+}

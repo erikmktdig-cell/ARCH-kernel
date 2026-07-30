@@ -1,0 +1,1 @@
+{"scenario":"missing_or_forward_causation","kind":"immutable_history_consistency","mutation":"causation points to later event","expected_violations":1}

@@ -1,0 +1,449 @@
+{
+  "$defs": {
+    "ActorType": {
+      "description": "Kinds of actors that may originate an event.",
+      "enum": [
+        "human",
+        "agent",
+        "system",
+        "integration"
+      ],
+      "title": "ActorType",
+      "type": "string"
+    },
+    "AnyCanonicalId": {
+      "anyOf": [
+        {
+          "examples": [
+            "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PRJ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ProjectId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PHX-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHX-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseExecutionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHS-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "ART-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^ART-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ArtifactId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "REQ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^REQ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RequirementId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "GATE-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^GATE-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "GateId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "GEX-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^GEX-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "GateExecutionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "APR-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^APR-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ApprovalId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "CHG-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^CHG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "ChangeId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "EVT-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^EVT-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "EventId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "ASN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^ASN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "AssignmentId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "PATCH-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PATCH-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PatchId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "DEC-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^DEC-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "DecisionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "RISK-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^RISK-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "RiskId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^TRN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "TransitionId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "INV-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^INV-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "InvariantId",
+          "type": "string"
+        },
+        {
+          "examples": [
+            "MIG-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^MIG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "MigrationId",
+          "type": "string"
+        }
+      ]
+    },
+    "EventActor": {
+      "additionalProperties": false,
+      "description": "Strict immutable attribution for an event.",
+      "properties": {
+        "actor_id": {
+          "title": "Actor Id",
+          "type": "string"
+        },
+        "actor_type": {
+          "$ref": "#/$defs/ActorType"
+        },
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Display Name"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "actor_type",
+        "actor_id"
+      ],
+      "title": "EventActor",
+      "type": "object"
+    },
+    "TypedReference": {
+      "additionalProperties": false,
+      "description": "Immutable reference to another canonical object without resolving it.",
+      "properties": {
+        "relation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Relation"
+        },
+        "target_id": {
+          "$ref": "#/$defs/AnyCanonicalId"
+        },
+        "target_type": {
+          "title": "Target Type",
+          "type": "string"
+        },
+        "target_version": {
+          "anyOf": [
+            {
+              "examples": [
+                "1.0.0",
+                "1.2.3-alpha.1",
+                "1.2.3-rc.1+sha.abc123"
+              ],
+              "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+              "title": "SemanticVersion",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Version"
+        }
+      },
+      "required": [
+        "target_type",
+        "target_id"
+      ],
+      "title": "TypedReference",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.event.event_envelope/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Immutable envelope for one historical event fact.",
+  "properties": {
+    "actor": {
+      "$ref": "#/$defs/EventActor"
+    },
+    "aggregate": {
+      "$ref": "#/$defs/TypedReference"
+    },
+    "causation_id": {
+      "anyOf": [
+        {
+          "examples": [
+            "EVT-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^EVT-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "EventId",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Causation Id"
+    },
+    "contract_name": {
+      "title": "Contract Name",
+      "type": "string"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "correlation_id": {
+      "anyOf": [
+        {
+          "examples": [
+            "EVT-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^EVT-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "EventId",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Correlation Id"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "event_id": {
+      "examples": [
+        "EVT-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+      ],
+      "pattern": "^EVT-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "title": "EventId",
+      "type": "string"
+    },
+    "event_type": {
+      "title": "Event Type",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "payload": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "array"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      },
+      "title": "FrozenJsonObject",
+      "type": "object"
+    },
+    "project_id": {
+      "examples": [
+        "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+      ],
+      "pattern": "^PRJ-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "title": "ProjectId",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "schema_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated At"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "schema_uri",
+    "created_at",
+    "event_id",
+    "event_type",
+    "project_id",
+    "aggregate",
+    "occurred_at",
+    "recorded_at",
+    "actor",
+    "correlation_id",
+    "causation_id",
+    "idempotency_key",
+    "schema_version",
+    "payload"
+  ],
+  "title": "EventEnvelope",
+  "type": "object"
+}

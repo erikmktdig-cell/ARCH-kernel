@@ -1,0 +1,33 @@
+{
+  "build_metadata": {},
+  "catalog_fingerprint": "sha256:79f7da3425dd0c3848b1c1d8e1e7d59f21bf3c289e120ae6ec7e3ac85a5a2a9d",
+  "descriptors": [
+    {
+      "aliases": [],
+      "canonical_name": "arch.test.catalog_model",
+      "compatibility_notes": null,
+      "deprecated_since": null,
+      "description": "Reusable test contract.",
+      "descriptor_version": "1.0.0",
+      "kind": "record",
+      "model_fingerprint": "sha256:7bf2558bdc1823550ec24b4b46bbd6199d1dd4a329d64677d34c76b376f37270",
+      "python_module": "tests.registry_helpers",
+      "python_qualname": "CatalogModelV1",
+      "removal_version": null,
+      "replaces": null,
+      "schema_filename": "contracts/arch.test.catalog_model.1.0.0.schema.json",
+      "schema_fingerprint": "sha256:7ecb1de977be7d97713a2b55805e1128ea41f3cf4ca0a26b18b66e314e22fc86",
+      "schema_id": "https://schemas.arch.local/arch.test.catalog_model/1.0.0",
+      "status": "active",
+      "tags": [
+        "test"
+      ],
+      "title": "CatalogModelV1",
+      "version": "1.0.0"
+    }
+  ],
+  "generator_identity": "arch-kernel.pydantic-json-schema",
+  "generator_version": "1.0.0",
+  "registry_format_version": "1.0.0",
+  "schema_dialect": "https://json-schema.org/draft/2020-12/schema"
+}

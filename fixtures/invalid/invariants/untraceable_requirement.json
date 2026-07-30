@@ -1,0 +1,1 @@
+{"scenario":"untraceable_requirement","kind":"requirement_traceability","mutation":"remove artifact and dependency traces","expected_violations":1}

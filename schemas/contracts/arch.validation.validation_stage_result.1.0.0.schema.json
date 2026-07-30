@@ -1,0 +1,311 @@
+{
+  "$defs": {
+    "InvariantEvaluationTarget": {
+      "enum": [
+        "original",
+        "projected",
+        "both"
+      ],
+      "title": "InvariantEvaluationTarget",
+      "type": "string"
+    },
+    "Severity": {
+      "description": "Severity levels for structured errors.",
+      "enum": [
+        "info",
+        "warning",
+        "error",
+        "critical"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "ValidationFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "actual": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ValidationJsonValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "blocking": {
+          "title": "Blocking",
+          "type": "boolean"
+        },
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "entity_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entity Id"
+        },
+        "entity_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Entity Type"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ValidationJsonValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "kind": {
+          "$ref": "#/$defs/ValidationFindingKind"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "remediation_hint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remediation Hint"
+        },
+        "sequence": {
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Id"
+        },
+        "source_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Key"
+        },
+        "source_target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/InvariantEvaluationTarget"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "stage": {
+          "$ref": "#/$defs/ValidationStage"
+        }
+      },
+      "required": [
+        "kind",
+        "stage",
+        "code",
+        "message",
+        "severity",
+        "blocking",
+        "sequence"
+      ],
+      "title": "ValidationFinding",
+      "type": "object"
+    },
+    "ValidationFindingKind": {
+      "enum": [
+        "contract_error",
+        "aggregate_error",
+        "patch_error",
+        "transition_error",
+        "guard_failure",
+        "invariant_violation",
+        "pipeline_error"
+      ],
+      "title": "ValidationFindingKind",
+      "type": "string"
+    },
+    "ValidationJsonValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "ValidationStage": {
+      "enum": [
+        "contract",
+        "aggregate",
+        "patch",
+        "transition",
+        "invariant",
+        "finalization"
+      ],
+      "title": "ValidationStage",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.validation.validation_stage_result/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "blocking_failure": {
+      "title": "Blocking Failure",
+      "type": "boolean"
+    },
+    "executed": {
+      "title": "Executed",
+      "type": "boolean"
+    },
+    "findings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ValidationFinding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "input_fingerprint": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Fingerprint"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "array"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      },
+      "title": "FrozenJsonObject",
+      "type": "object"
+    },
+    "output_fingerprint": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Fingerprint"
+    },
+    "stage": {
+      "$ref": "#/$defs/ValidationStage"
+    },
+    "success": {
+      "title": "Success",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "stage",
+    "executed",
+    "success",
+    "blocking_failure",
+    "metadata"
+  ],
+  "title": "ValidationStageResult",
+  "type": "object"
+}

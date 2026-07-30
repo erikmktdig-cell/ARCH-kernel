@@ -1,0 +1,139 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  SOURCE_DATE_EPOCH: "1784678400"
+  PYTHONHASHSEED: "0"
+
+jobs:
+  static-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v9
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv sync --frozen --all-groups
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy src tests scripts
+
+  test-matrix:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.12", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: astral-sh/setup-uv@v9
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+          cache-suffix: ${{ matrix.os }}-${{ matrix.python }}
+      - run: uv sync --frozen --all-groups
+      - name: Full branch-coverage suite
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12'
+        run: uv run pytest -p no:cacheprovider
+      - name: Compatibility smoke suite
+        if: matrix.os != 'ubuntu-latest' || matrix.python != '3.12'
+        run: uv run pytest -p no:cacheprovider -m "unit or contract or release"
+      - name: Property suite
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12'
+        run: uv run pytest -p no:cacheprovider -m property
+      - name: Regression suite
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12'
+        run: uv run pytest -p no:cacheprovider -m regression
+
+  build-and-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v9
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv sync --frozen --all-groups
+      - run: uv build
+      - run: uv run twine check dist/*
+      - run: uv run python scripts/check_artifacts.py dist
+      - uses: actions/upload-artifact@v7
+        with:
+          name: distributions
+          path: dist/
+          if-no-files-found: error
+
+  reproducibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v9
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv sync --frozen --all-groups
+      - run: uv run python scripts/check_reproducible_build.py
+      - run: uv run pytest -p no:cacheprovider -m release -k freshness
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v9
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv sync --frozen --all-groups
+      - run: uv lock --check
+      - name: Export locked dependencies for audit
+        run: >-
+          uv export --all-groups --frozen --no-emit-project
+          --format requirements-txt
+          --output-file build/audit-requirements.txt
+      - name: Refresh vulnerability advisory database
+        run: >-
+          uv run pip-audit
+          -r build/audit-requirements.txt
+          --disable-pip
+          --progress-spinner off
+      - name: License policy tests
+        run: uv run pytest -p no:cacheprovider -m release -k license

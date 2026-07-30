@@ -1,0 +1,654 @@
+{
+  "contracts_exports": [
+    "ActorType",
+    "AnyCanonicalId",
+    "ApprovalDecision",
+    "ApprovalId",
+    "ArtifactId",
+    "ArtifactRecord",
+    "ArtifactStatus",
+    "AssignmentId",
+    "CANONICAL_ID_TYPES",
+    "CanonicalId",
+    "ChangeId",
+    "CompatibilityFinding",
+    "CompatibilityLevel",
+    "CompatibilityReport",
+    "ContractAlias",
+    "ContractDescriptor",
+    "ContractIdentity",
+    "ContractKind",
+    "ContractModel",
+    "ContractRegistration",
+    "ContractRegistryAuditFinding",
+    "ContractRegistryAuditResult",
+    "ContractRegistryManifest",
+    "ContractStatus",
+    "ContractVersionRef",
+    "DecisionId",
+    "DecisionRecord",
+    "DecisionStatus",
+    "DependencyEdge",
+    "DependencyType",
+    "DryRunResult",
+    "EffectType",
+    "EffectValueSource",
+    "EventActor",
+    "EventEnvelope",
+    "EventId",
+    "EvidenceReference",
+    "ExecutionStatus",
+    "FrozenJsonObject",
+    "GateExecutionId",
+    "GateId",
+    "GateResult",
+    "GuardEvaluation",
+    "GuardType",
+    "ImmutableRecord",
+    "InvariantDefinition",
+    "InvariantEvaluationContext",
+    "InvariantEvaluationResult",
+    "InvariantEvaluationTarget",
+    "InvariantEvidence",
+    "InvariantId",
+    "InvariantJsonValue",
+    "InvariantKind",
+    "InvariantScope",
+    "InvariantSeverity",
+    "InvariantViolation",
+    "JsonObject",
+    "LifecycleState",
+    "MigrationCoercion",
+    "MigrationDefinition",
+    "MigrationDirection",
+    "MigrationDisposition",
+    "MigrationFinding",
+    "MigrationId",
+    "MigrationJsonValue",
+    "MigrationOperation",
+    "MigrationOperationType",
+    "MigrationPath",
+    "MigrationPlan",
+    "MigrationPolicy",
+    "MigrationRegistryAuditResult",
+    "MigrationRequest",
+    "MigrationResult",
+    "MigrationStatus",
+    "MigrationStepResult",
+    "PatchId",
+    "PatchOperation",
+    "PatchOperationType",
+    "PatchPath",
+    "PatchValidationResult",
+    "PhaseCode",
+    "PhaseExecutionId",
+    "PhaseExecutionRecord",
+    "PhaseId",
+    "PhaseStatus",
+    "ProjectCriticality",
+    "ProjectId",
+    "ProjectMetadata",
+    "ProjectProfile",
+    "ProjectState",
+    "RequirementId",
+    "RequirementPriority",
+    "RequirementRecord",
+    "RequirementStatus",
+    "RiskId",
+    "RiskRecord",
+    "RiskStatus",
+    "Route",
+    "SchemaArtifact",
+    "SchemaJsonValue",
+    "SemanticVersion",
+    "StatePatch",
+    "TransitionDefinition",
+    "TransitionDomain",
+    "TransitionEffect",
+    "TransitionEvaluationResult",
+    "TransitionGuard",
+    "TransitionId",
+    "TransitionJsonValue",
+    "TransitionRequest",
+    "TransitionTarget",
+    "TypedReference",
+    "ValidationDisposition",
+    "ValidationFinding",
+    "ValidationFindingKind",
+    "ValidationIntent",
+    "ValidationJsonValue",
+    "ValidationPipelinePolicy",
+    "ValidationPipelineRequest",
+    "ValidationPipelineResult",
+    "ValidationStage",
+    "ValidationStageResult",
+    "VersionBump",
+    "VersionedRecord",
+    "target_type_for_id",
+    "validate_canonical_contract_name"
+  ],
+  "kernel_exports": [
+    "ArchKernelError",
+    "ContractRegistry",
+    "ErrorCode",
+    "ErrorDetail",
+    "EventValidationError",
+    "IdentifierValidationError",
+    "InvariantRegistry",
+    "MigrationRegistry",
+    "ReferenceValidationError",
+    "Severity",
+    "TransitionRegistry",
+    "VersionValidationError",
+    "apply_state_patch_dry_run",
+    "audit_contract_registry",
+    "audit_migration_registry",
+    "build_builtin_contract_registry",
+    "build_registry_manifest",
+    "canonicalize_json",
+    "compare_schema_artifacts",
+    "compute_content_fingerprint",
+    "compute_fingerprint",
+    "ensure_utc",
+    "evaluate_invariants",
+    "evaluate_transition",
+    "generate_contract_schema",
+    "generate_registry_schemas",
+    "publish_registry_schemas",
+    "recommend_version_bump",
+    "resolve_migration_plan",
+    "run_migration_dry_run",
+    "run_validation_pipeline",
+    "utc_now",
+    "validate_event_causality",
+    "validate_event_temporal_order",
+    "validate_event_type",
+    "validate_idempotency_key",
+    "validate_json_object",
+    "validate_patch_path_policy",
+    "validate_state_patch"
+  ],
+  "contract_registry": [
+    {
+      "canonical_name": "arch.event.event_actor",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:79c8ae3c3404e5079724b9b25b7e368436022c967055cd8f508c15ee504636de"
+    },
+    {
+      "canonical_name": "arch.event.event_envelope",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:0bfd9d4ce30b3704069183a318dab2eebe183fa0be6721f2ad0fe908dfc549ea"
+    },
+    {
+      "canonical_name": "arch.invariant.invariant_definition",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:be1fe9f2cc395f260b94343b46dfe85ef4c964a6a0cb3c507bb44ae995c1af45"
+    },
+    {
+      "canonical_name": "arch.invariant.invariant_evaluation_context",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:03897895e8c826e97c70afbfa1cd5d08a0df778fc348abd2bfe34094688bfc91"
+    },
+    {
+      "canonical_name": "arch.invariant.invariant_evaluation_result",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:d7255d81e9af850aeba043a01ec29ce59d4710b00028f0cb13f509757cc83460"
+    },
+    {
+      "canonical_name": "arch.invariant.invariant_evidence",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:c76b241e2c4d2cf31518c766af8f85b6d67e2539ea60dbb45b2f225fd77932e3"
+    },
+    {
+      "canonical_name": "arch.invariant.invariant_violation",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:02fee1a820a344f09a65209964ccc536a5386edc4223ea906b7af16a2d3c1bfd"
+    },
+    {
+      "canonical_name": "arch.patch.dry_run_result",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:685f8603d1d5bfcc1fb69539d2bd3286b16349c36de53e2c928783157fdc16b4"
+    },
+    {
+      "canonical_name": "arch.patch.patch_operation",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:3131b4cc4040f4e2ccd67ab3e188cb0c05534fdfa15bfc645995d19171a6d6df"
+    },
+    {
+      "canonical_name": "arch.patch.patch_validation_result",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:358c05a31ced80675905c39ff21b0ac925f824bfd7d8ed63ad52bf327c036efc"
+    },
+    {
+      "canonical_name": "arch.patch.state_patch",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:fd1d2374dfdb2f684a413765d3bad9a20b4946f8244cb15ba9525e020637f4f8"
+    },
+    {
+      "canonical_name": "arch.project.artifact_record",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:63047804fe3abd7fcc19145551a2537eb36f7a1243c7720a32a99b0c21f5c7c3"
+    },
+    {
+      "canonical_name": "arch.project.decision_record",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:a79bcd0296d253100373412ae7286b766d4939a23c2f0a1fd1e1743381a72702"
+    },
+    {
+      "canonical_name": "arch.project.dependency_edge",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:c8430548ad24c13b68fcb6cafb97fd5808c9019bd655e69d1f663c959566882d"
+    },
+    {
+      "canonical_name": "arch.project.lifecycle_state",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:c77a068566380c36e5acd9cc37bf37c9dfc19ed5d5f78e8621e958203487d53f"
+    },
+    {
+      "canonical_name": "arch.project.phase_execution_record",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:397d8ec2af31c146105e187ae0cf2979cbd4b606196bc906db9d807327061940"
+    },
+    {
+      "canonical_name": "arch.project.project_metadata",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:4f73a538e8c104d33fc92ccce10b2487c284e0b1d9a3b03e61fde22a6943a384"
+    },
+    {
+      "canonical_name": "arch.project.project_profile",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:7f251521c0d744c6b902eac3eb2a213a9722ed14332da3cd82ca818af33716e4"
+    },
+    {
+      "canonical_name": "arch.project.project_state",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:51161ee51e69cb845f3b93c44e2a344cc4f05c1415975412c341a709dfec076a"
+    },
+    {
+      "canonical_name": "arch.project.requirement_record",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:a9424a94098b081d95d1c2518db29c4129148666a8833ed2b08a4f072863d582"
+    },
+    {
+      "canonical_name": "arch.project.risk_record",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:6de99858ec74910ed4eb6b093310985acdaeb99886e91e2e3a8ac5b8785084b1"
+    },
+    {
+      "canonical_name": "arch.reference.evidence_reference",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:e93ea0e487bdf3929b27546cad3e924b3411919ce46e9377a67794928bed2c24"
+    },
+    {
+      "canonical_name": "arch.reference.typed_reference",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:4d232f47e2e351950776147f6c5f2f34243ecfbaca29efeb84d85111eeaf0d74"
+    },
+    {
+      "canonical_name": "arch.transition.guard_evaluation",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:0ca78b3b304945ca6ccda13419229cb65dab16b25e5a6e029b9ff9bf981fe54f"
+    },
+    {
+      "canonical_name": "arch.transition.transition_definition",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:2d3243b4877b4b2a3b2b395cc79cf171d07a102551d1d85501f49c28b48c8093"
+    },
+    {
+      "canonical_name": "arch.transition.transition_effect",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:5096bdc40266467e4bd864a96a0f0e336c2939ca5ecc25f605679625453907c8"
+    },
+    {
+      "canonical_name": "arch.transition.transition_evaluation_result",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:660d5baae6fb5bad2a3bdd258f8f1ef4e96287ea3685fd2901cb00ff8759a67d"
+    },
+    {
+      "canonical_name": "arch.transition.transition_guard",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:7314064feda864a1b71943cc625dfb86cb3db5bc4a20fc25d95d4cb7e83d867c"
+    },
+    {
+      "canonical_name": "arch.transition.transition_request",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:161dddb8f18b41c30e8de342ad1c190036237a081952596665e1fa7c6708c901"
+    },
+    {
+      "canonical_name": "arch.transition.transition_target",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:99ab157d6103797f1aa696aabf98f3a2e83514b3d714bb126b44440951efdd44"
+    },
+    {
+      "canonical_name": "arch.validation.validation_finding",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:6632393f55f5b2478001c14d63eff7ab2a6221ba486c9090829c8540dce0c68a"
+    },
+    {
+      "canonical_name": "arch.validation.validation_pipeline_policy",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:1f895183c6831c569641022d67d9c6314706dd594fa95f69ed5106de6fdc5aac"
+    },
+    {
+      "canonical_name": "arch.validation.validation_pipeline_request",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:f7d123d8e68b394bf32b230276080eb08c7524aec8a825980589f1bea8a5afd6"
+    },
+    {
+      "canonical_name": "arch.validation.validation_pipeline_result",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:8bf991a8b7427ca7730f9eecd4be8c16764d4ee38210e8552ecd00fdd39633dd"
+    },
+    {
+      "canonical_name": "arch.validation.validation_stage_result",
+      "version": "1.0.0",
+      "schema_fingerprint": "sha256:7d0bd1fa05e9f1614c0ed6b6ab71220fed42bae306fc9acf7d7f5b99de3df096"
+    }
+  ],
+  "error_codes": [
+    "SCHEMA_VALIDATION_ERROR",
+    "UNKNOWN_FIELD",
+    "INVALID_ENUM_VALUE",
+    "INVALID_IDENTIFIER",
+    "INVALID_REFERENCE",
+    "REFERENCE_TYPE_MISMATCH",
+    "UNSUPPORTED_CONTRACT_VERSION",
+    "INVALID_EVENT_TYPE",
+    "INVALID_EVENT_TIMESTAMP_ORDER",
+    "INVALID_CAUSAL_REFERENCE",
+    "INVALID_IDEMPOTENCY_KEY",
+    "INVALID_EVENT_PAYLOAD",
+    "STALE_STATE_VERSION",
+    "STALE_OBJECT_VERSION",
+    "PATCH_SCOPE_VIOLATION",
+    "IMMUTABLE_RECORD_MODIFICATION",
+    "PATCH_TEST_FAILED",
+    "TRANSITION_NOT_FOUND",
+    "AMBIGUOUS_TRANSITION",
+    "TRANSITION_GUARD_FAILED",
+    "INVALID_TRANSITION_DEFINITION",
+    "UNSUPPORTED_TRANSITION_DOMAIN",
+    "DUPLICATE_INVARIANT_ID",
+    "DUPLICATE_INVARIANT_KEY",
+    "INVALID_INVARIANT_DEFINITION",
+    "INVARIANT_EVALUATION_ERROR",
+    "INVARIANT_VIOLATION",
+    "INVALID_VALIDATION_REQUEST",
+    "MISSING_TRANSITION_REGISTRY",
+    "MISSING_INVARIANT_REGISTRY",
+    "VALIDATION_STAGE_FAILED",
+    "VALIDATION_PIPELINE_INCONSISTENCY",
+    "DUPLICATE_CONTRACT_IDENTITY",
+    "DUPLICATE_CONTRACT_ALIAS",
+    "CONTRACT_ALIAS_COLLISION",
+    "CONTRACT_MODEL_MISMATCH",
+    "INVALID_CONTRACT_DESCRIPTOR",
+    "SCHEMA_GENERATION_FAILED",
+    "SCHEMA_PUBLICATION_FAILED",
+    "SCHEMA_COMPATIBILITY_UNKNOWN",
+    "INADEQUATE_VERSION_BUMP",
+    "DUPLICATE_MIGRATION_ID",
+    "DUPLICATE_MIGRATION_KEY",
+    "DUPLICATE_MIGRATION_EDGE",
+    "INVALID_MIGRATION_DEFINITION",
+    "MIGRATION_ENDPOINT_NOT_FOUND",
+    "MIGRATION_PATH_NOT_FOUND",
+    "AMBIGUOUS_MIGRATION_PATH",
+    "MIGRATION_POLICY_VIOLATION",
+    "MIGRATION_PRECONDITION_FAILED",
+    "MIGRATION_OPERATION_FAILED",
+    "MIGRATION_SOURCE_VALIDATION_FAILED",
+    "MIGRATION_TARGET_VALIDATION_FAILED",
+    "MIGRATION_SCHEMA_FINGERPRINT_MISMATCH",
+    "MIGRATION_REVERSIBILITY_INVALID",
+    "MIGRATION_AUDIT_FAILED"
+  ],
+  "enum_values": {
+    "ActorType": [
+      "human",
+      "agent",
+      "system",
+      "integration"
+    ],
+    "ApprovalDecision": [
+      "approved",
+      "approved_with_conditions",
+      "rejected",
+      "deferred",
+      "revoked",
+      "expired"
+    ],
+    "ArtifactStatus": [
+      "draft",
+      "proposed",
+      "under_review",
+      "changes_requested",
+      "conditionally_approved",
+      "approved",
+      "rejected",
+      "invalidated",
+      "superseded",
+      "archived"
+    ],
+    "CompatibilityLevel": [
+      "identical",
+      "backward_compatible",
+      "forward_compatible",
+      "fully_compatible",
+      "breaking",
+      "unknown"
+    ],
+    "ContractKind": [
+      "primitive",
+      "record",
+      "aggregate",
+      "event",
+      "command",
+      "result",
+      "registry",
+      "policy",
+      "diagnostic"
+    ],
+    "ContractStatus": [
+      "active",
+      "deprecated",
+      "reserved",
+      "internal"
+    ],
+    "EffectType": [
+      "set_field",
+      "remove_field",
+      "assert_field"
+    ],
+    "EffectValueSource": [
+      "literal",
+      "to_state",
+      "evaluated_at",
+      "entity_id"
+    ],
+    "ExecutionStatus": [
+      "completed",
+      "completed_with_conditions",
+      "blocked",
+      "needs_review",
+      "conflict_detected",
+      "invalid_input",
+      "stopped"
+    ],
+    "GateResult": [
+      "pass",
+      "pass_with_condition",
+      "fail",
+      "not_applicable",
+      "insufficient_evidence",
+      "invalidated"
+    ],
+    "GuardType": [
+      "field_equals",
+      "field_not_equals",
+      "field_in",
+      "field_exists",
+      "field_absent",
+      "reference_exists",
+      "no_active_phase_except_target",
+      "all_dependencies_satisfied"
+    ],
+    "InvariantEvaluationTarget": [
+      "original",
+      "projected",
+      "both"
+    ],
+    "InvariantKind": [
+      "single_active_phase",
+      "lifecycle_phase_alignment",
+      "approved_baseline_integrity",
+      "required_dependency_satisfaction",
+      "requirement_traceability",
+      "critical_risk_control",
+      "terminal_phase_consistency",
+      "immutable_history_consistency",
+      "monotonic_record_versions"
+    ],
+    "InvariantScope": [
+      "project",
+      "lifecycle",
+      "phase",
+      "artifact",
+      "requirement",
+      "risk",
+      "dependency",
+      "history"
+    ],
+    "InvariantSeverity": [
+      "info",
+      "warning",
+      "error",
+      "critical"
+    ],
+    "MigrationCoercion": [
+      "integer_to_number",
+      "number_to_string",
+      "integer_to_string",
+      "boolean_to_string",
+      "string_to_integer",
+      "string_to_number",
+      "string_to_boolean"
+    ],
+    "MigrationDirection": [
+      "upgrade",
+      "downgrade"
+    ],
+    "MigrationDisposition": [
+      "succeeded",
+      "succeeded_with_findings",
+      "failed",
+      "not_required",
+      "not_evaluated"
+    ],
+    "MigrationOperationType": [
+      "add",
+      "remove",
+      "replace",
+      "move",
+      "copy",
+      "rename",
+      "test",
+      "set_default",
+      "map_enum",
+      "coerce"
+    ],
+    "MigrationStatus": [
+      "active",
+      "deprecated",
+      "reserved"
+    ],
+    "PatchOperationType": [
+      "add",
+      "replace",
+      "remove",
+      "test"
+    ],
+    "PhaseCode": [
+      "F01",
+      "F02",
+      "F03",
+      "F04",
+      "F05",
+      "F06",
+      "F07",
+      "F08",
+      "F09",
+      "F10",
+      "F11",
+      "F12",
+      "F13",
+      "F14",
+      "F15"
+    ],
+    "PhaseStatus": [
+      "not_started",
+      "eligible",
+      "ready",
+      "active",
+      "blocked",
+      "awaiting_approval",
+      "in_review",
+      "completed",
+      "completed_with_conditions",
+      "revalidation_pending",
+      "reopened",
+      "cancelled"
+    ],
+    "Route": [
+      "quick",
+      "standard",
+      "critical"
+    ],
+    "TransitionDomain": [
+      "project_lifecycle",
+      "phase_status",
+      "artifact_status",
+      "approval_decision",
+      "risk_status",
+      "requirement_status"
+    ],
+    "ValidationDisposition": [
+      "accepted",
+      "accepted_with_findings",
+      "rejected",
+      "invalid_input",
+      "not_evaluated"
+    ],
+    "ValidationFindingKind": [
+      "contract_error",
+      "aggregate_error",
+      "patch_error",
+      "transition_error",
+      "guard_failure",
+      "invariant_violation",
+      "pipeline_error"
+    ],
+    "ValidationIntent": [
+      "validate_state",
+      "validate_patch",
+      "validate_transition",
+      "validate_release",
+      "validate_history"
+    ],
+    "ValidationStage": [
+      "contract",
+      "aggregate",
+      "patch",
+      "transition",
+      "invariant",
+      "finalization"
+    ],
+    "VersionBump": [
+      "patch",
+      "minor",
+      "major",
+      "manual_review"
+    ]
+  },
+  "snapshot_fingerprint": "sha256:cb45e22d3c5d7e539421cb58eb31dc93abdb2ab5a8121c0361f6cb17ad15c39a"
+}

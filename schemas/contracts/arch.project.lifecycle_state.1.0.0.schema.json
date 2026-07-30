@@ -1,0 +1,165 @@
+{
+  "$defs": {
+    "PhaseCode": {
+      "description": "Canonical ARch phase codes.",
+      "enum": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F15"
+      ],
+      "title": "PhaseCode",
+      "type": "string"
+    },
+    "PhaseStatus": {
+      "description": "Canonical lifecycle status for phase execution.",
+      "enum": [
+        "not_started",
+        "eligible",
+        "ready",
+        "active",
+        "blocked",
+        "awaiting_approval",
+        "in_review",
+        "completed",
+        "completed_with_conditions",
+        "revalidation_pending",
+        "reopened",
+        "cancelled"
+      ],
+      "title": "PhaseStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.project.lifecycle_state/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Current lifecycle position without cross-record validation.",
+  "properties": {
+    "blocked_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blocked Reason"
+    },
+    "completed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Completed At"
+    },
+    "contract_name": {
+      "title": "Contract Name",
+      "type": "string"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "current_phase_code": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PhaseCode"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "current_phase_id": {
+      "anyOf": [
+        {
+          "examples": [
+            "PHS-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^PHS-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "PhaseId",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Current Phase Id"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "started_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Started At"
+    },
+    "status": {
+      "$ref": "#/$defs/PhaseStatus"
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated At"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "schema_uri",
+    "created_at",
+    "current_phase_id",
+    "current_phase_code",
+    "status"
+  ],
+  "title": "LifecycleState",
+  "type": "object"
+}

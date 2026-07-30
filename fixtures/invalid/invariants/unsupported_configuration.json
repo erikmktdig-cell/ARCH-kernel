@@ -1,0 +1,1 @@
+{"scenario":"unsupported_configuration","kind":"single_active_phase","configuration":{"unknown":true},"expected_error":"INVALID_INVARIANT_DEFINITION"}

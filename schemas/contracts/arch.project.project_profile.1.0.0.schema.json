@@ -1,0 +1,105 @@
+{
+  "$defs": {
+    "Route": {
+      "description": "Canonical ARch routing modes.",
+      "enum": [
+        "quick",
+        "standard",
+        "critical"
+      ],
+      "title": "Route",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.project.project_profile/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Project categorization and immutable planning inputs.",
+  "properties": {
+    "constraints": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraints",
+      "type": "array"
+    },
+    "contract_name": {
+      "title": "Contract Name",
+      "type": "string"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "criticality": {
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "title": "Criticality",
+      "type": "string"
+    },
+    "default_route": {
+      "$ref": "#/$defs/Route"
+    },
+    "objectives": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Objectives",
+      "type": "array"
+    },
+    "project_type": {
+      "title": "Project Type",
+      "type": "string"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "success_criteria": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Success Criteria",
+      "type": "array"
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated At"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "schema_uri",
+    "created_at",
+    "project_type",
+    "criticality",
+    "default_route"
+  ],
+  "title": "ProjectProfile",
+  "type": "object"
+}

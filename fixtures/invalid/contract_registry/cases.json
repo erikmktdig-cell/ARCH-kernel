@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {"name": "duplicate_canonical_name_version", "expected_code": "DUPLICATE_CONTRACT_IDENTITY"},
+    {"name": "duplicate_alias", "expected_code": "DUPLICATE_CONTRACT_ALIAS"},
+    {"name": "alias_canonical_collision", "expected_code": "CONTRACT_ALIAS_COLLISION"},
+    {"name": "malformed_canonical_name", "expected_code": "INVALID_CONTRACT_DESCRIPTOR"},
+    {"name": "invalid_schema_id", "expected_code": "INVALID_CONTRACT_DESCRIPTOR"},
+    {"name": "invalid_schema_filename", "expected_code": "INVALID_CONTRACT_DESCRIPTOR"},
+    {"name": "descriptor_model_mismatch", "expected_code": "CONTRACT_MODEL_MISMATCH"},
+    {"name": "duplicate_schema_id", "expected_code": "INVALID_CONTRACT_DESCRIPTOR"},
+    {"name": "duplicate_schema_filename", "expected_code": "INVALID_CONTRACT_DESCRIPTOR"},
+    {"name": "non_increasing_version_sequence", "expected_code": "INADEQUATE_VERSION_BUMP"},
+    {"name": "deprecated_removal_inversion", "expected_code": "INVALID_CONTRACT_DESCRIPTOR"},
+    {"name": "breaking_minor_bump", "expected_code": "INADEQUATE_VERSION_BUMP"},
+    {"name": "unsupported_compatibility", "expected_code": "SCHEMA_COMPATIBILITY_UNKNOWN"},
+    {"name": "manifest_fingerprint_mismatch", "expected_code": "INVALID_CONTRACT_DESCRIPTOR"}
+  ]
+}

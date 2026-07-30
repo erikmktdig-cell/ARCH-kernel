@@ -1,0 +1,1 @@
+{"scenario":"duplicate_event_id","kind":"immutable_history_consistency","mutation":"repeat event_id","expected_violations":1}

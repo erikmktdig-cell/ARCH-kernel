@@ -1,0 +1,91 @@
+{
+  "$defs": {
+    "EffectType": {
+      "description": "Declarative effects that map directly to K05 operations.",
+      "enum": [
+        "set_field",
+        "remove_field",
+        "assert_field"
+      ],
+      "title": "EffectType",
+      "type": "string"
+    },
+    "EffectValueSource": {
+      "description": "Closed sources from which an effect value may be rendered.",
+      "enum": [
+        "literal",
+        "to_state",
+        "evaluated_at",
+        "entity_id"
+      ],
+      "title": "EffectValueSource",
+      "type": "string"
+    },
+    "TransitionJsonValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$id": "https://schemas.arch.local/arch.transition.transition_effect/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One ordered effect rendered into a K05 patch operation.",
+  "properties": {
+    "effect_type": {
+      "$ref": "#/$defs/EffectType"
+    },
+    "literal_value": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TransitionJsonValue"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "path_template": {
+      "title": "Path Template",
+      "type": "string"
+    },
+    "value_source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EffectValueSource"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "effect_type",
+    "path_template"
+  ],
+  "title": "TransitionEffect",
+  "type": "object"
+}

@@ -25,7 +25,7 @@ from tests.registry_helpers import (
 
 def test_builtin_registry_is_complete_ordered_and_schema_backed() -> None:
     registry = build_builtin_contract_registry()
-    assert len(registry.registrations) == 35
+    assert len(registry.registrations) == 38
     assert tuple(
         (item.descriptor.canonical_name, item.descriptor.version) for item in registry.registrations
     ) == tuple(

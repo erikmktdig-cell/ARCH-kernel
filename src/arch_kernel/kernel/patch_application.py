@@ -35,8 +35,9 @@ _ROOT_MAP = {
     "requirements": "requirement_registry",
     "risks": "risk_registry",
     "dependencies": "dependency_graph",
+    "workflows": "workflow_registry",
 }
-_REGISTRY_ROOTS = {"phases", "artifacts", "requirements", "risks"}
+_REGISTRY_ROOTS = {"phases", "artifacts", "requirements", "risks", "workflows"}
 _CONFLICT_CODES = {
     ErrorCode.STALE_STATE_VERSION,
     ErrorCode.STALE_OBJECT_VERSION,
@@ -327,6 +328,10 @@ def _touch_versioned_records(
         if isinstance(record_version, int) and not isinstance(record_version, bool):
             record["record_version"] = record_version + 1
             record["updated_at"] = timestamp
+            if public_root == "workflows":
+                root_version = document.get("record_version")
+                if isinstance(root_version, int) and not isinstance(root_version, bool):
+                    record["state_version_updated"] = root_version + 1
 
 
 def _validation(errors: tuple[ErrorDetail, ...]) -> PatchValidationResult:

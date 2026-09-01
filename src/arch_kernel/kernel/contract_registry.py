@@ -44,6 +44,9 @@ from arch_kernel.contracts import (
     ValidationPipelineRequest,
     ValidationPipelineResult,
     ValidationStageResult,
+    WorkflowDefinition,
+    WorkflowStateRecord,
+    WorkflowTransitionDefinition,
 )
 from arch_kernel.contracts.registry import (
     ContractDescriptor,
@@ -57,6 +60,7 @@ from arch_kernel.kernel.fingerprints import compute_fingerprint
 from arch_kernel.kernel.schema_generation import generate_contract_schema
 
 _VERSION = SemanticVersion.parse("1.0.0")
+_PROJECT_STATE_VERSION = SemanticVersion.parse("2.0.0")
 _ZERO_FINGERPRINT = "sha256:" + ("0" * 64)
 
 
@@ -255,6 +259,7 @@ def _registration(
     domain: str,
     kind: ContractKind,
 ) -> ContractRegistration:
+    version = _PROJECT_STATE_VERSION if model is ProjectState else _VERSION
     canonical_name = f"arch.{domain}.{_snake_case(model.__name__)}"
     identity = {
         "python_module": model.__module__,
@@ -262,13 +267,13 @@ def _registration(
     }
     descriptor = ContractDescriptor(
         canonical_name=canonical_name,
-        version=_VERSION,
+        version=version,
         kind=kind,
         status=ContractStatus.ACTIVE,
         python_module=model.__module__,
         python_qualname=model.__qualname__,
-        schema_id=f"https://schemas.arch.local/{canonical_name}/{_VERSION}",
-        schema_filename=f"contracts/{canonical_name}.{_VERSION}.schema.json",
+        schema_id=f"https://schemas.arch.local/{canonical_name}/{version}",
+        schema_filename=f"contracts/{canonical_name}.{version}.schema.json",
         title=model.__name__,
         description=(model.__doc__ or f"Public {model.__name__} contract.").strip(),
         tags=(domain,),
@@ -296,6 +301,8 @@ _BUILTIN_MODELS: tuple[tuple[type[BaseModel], str, ContractKind], ...] = (
     (RiskRecord, "project", ContractKind.RECORD),
     (DecisionRecord, "project", ContractKind.RECORD),
     (DependencyEdge, "project", ContractKind.RECORD),
+    (WorkflowDefinition, "workflow", ContractKind.RECORD),
+    (WorkflowStateRecord, "workflow", ContractKind.RECORD),
     (ProjectState, "project", ContractKind.AGGREGATE),
     (EventActor, "event", ContractKind.RECORD),
     (EventEnvelope, "event", ContractKind.EVENT),
@@ -307,6 +314,7 @@ _BUILTIN_MODELS: tuple[tuple[type[BaseModel], str, ContractKind], ...] = (
     (TransitionGuard, "transition", ContractKind.POLICY),
     (TransitionEffect, "transition", ContractKind.COMMAND),
     (TransitionDefinition, "transition", ContractKind.RECORD),
+    (WorkflowTransitionDefinition, "transition", ContractKind.RECORD),
     (TransitionRequest, "transition", ContractKind.COMMAND),
     (GuardEvaluation, "transition", ContractKind.DIAGNOSTIC),
     (TransitionEvaluationResult, "transition", ContractKind.RESULT),

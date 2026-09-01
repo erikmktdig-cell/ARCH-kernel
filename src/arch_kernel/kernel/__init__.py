@@ -36,6 +36,7 @@ if TYPE_CHECKING:
         InvariantEvaluationResult,
     )
     from arch_kernel.contracts.migrations import (
+        MigrationDefinition,
         MigrationPlan,
         MigrationRegistryAuditResult,
         MigrationRequest,
@@ -68,10 +69,12 @@ if TYPE_CHECKING:
         ValidationPipelineRequest,
         ValidationPipelineResult,
     )
+    from arch_kernel.contracts.workflows import WorkflowDefinition, WorkflowStateRecord
     from arch_kernel.kernel.contract_registry import ContractRegistry
     from arch_kernel.kernel.invariant_registry import InvariantRegistry
     from arch_kernel.kernel.migration_registry import MigrationRegistry
     from arch_kernel.kernel.transition_registry import TransitionRegistry
+    from arch_kernel.kernel.workflow_registry import WorkflowDefinitionRegistry
 
 
 def validate_state_patch(
@@ -157,6 +160,33 @@ def build_builtin_contract_registry() -> ContractRegistry:
     from arch_kernel.kernel.contract_registry import build_builtin_contract_registry as build
 
     return build()
+
+
+def build_project_state_v1_to_v2_migration() -> MigrationDefinition:
+    """Build the explicit ProjectState compatibility migration."""
+
+    from arch_kernel.kernel.project_state_migration import (
+        build_project_state_v1_to_v2_migration as build,
+    )
+
+    return build()
+
+
+def initialize_workflow_state(
+    definition: WorkflowDefinition,
+    *,
+    created_at: datetime,
+    state_version_created: int,
+) -> WorkflowStateRecord:
+    """Initialize one generic workflow from an explicit definition."""
+
+    from arch_kernel.kernel.workflow_registry import initialize_workflow_state as initialize
+
+    return initialize(
+        definition,
+        created_at=created_at,
+        state_version_created=state_version_created,
+    )
 
 
 def generate_contract_schema(
@@ -279,6 +309,10 @@ def __getattr__(name: str) -> Any:
         from arch_kernel.kernel.migration_registry import MigrationRegistry
 
         return MigrationRegistry
+    if name == "WorkflowDefinitionRegistry":
+        from arch_kernel.kernel.workflow_registry import WorkflowDefinitionRegistry
+
+        return WorkflowDefinitionRegistry
     raise AttributeError(name)
 
 
@@ -295,10 +329,12 @@ __all__ = (
     "Severity",
     "TransitionRegistry",
     "VersionValidationError",
+    "WorkflowDefinitionRegistry",
     "apply_state_patch_dry_run",
     "audit_contract_registry",
     "audit_migration_registry",
     "build_builtin_contract_registry",
+    "build_project_state_v1_to_v2_migration",
     "build_registry_manifest",
     "canonicalize_json",
     "compare_schema_artifacts",
@@ -309,6 +345,7 @@ __all__ = (
     "evaluate_transition",
     "generate_contract_schema",
     "generate_registry_schemas",
+    "initialize_workflow_state",
     "publish_registry_schemas",
     "recommend_version_bump",
     "resolve_migration_plan",

@@ -1,0 +1,94 @@
+{
+  "$id": "https://schemas.arch.local/arch.workflow.workflow_definition/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Closed deterministic state space owned by one workflow namespace.",
+  "properties": {
+    "allowed_states": {
+      "items": {
+        "pattern": "^[A-Za-z][A-Za-z0-9_]*(?:[.-][A-Za-z0-9_]+)*$",
+        "title": "WorkflowStateKey",
+        "type": "string"
+      },
+      "title": "Allowed States",
+      "type": "array"
+    },
+    "contract_name": {
+      "title": "Contract Name",
+      "type": "string"
+    },
+    "contract_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "definition_version": {
+      "examples": [
+        "1.0.0",
+        "1.2.3-alpha.1",
+        "1.2.3-rc.1+sha.abc123"
+      ],
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "title": "SemanticVersion",
+      "type": "string"
+    },
+    "initial_state": {
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*(?:[.-][A-Za-z0-9_]+)*$",
+      "title": "WorkflowStateKey",
+      "type": "string"
+    },
+    "namespace": {
+      "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$",
+      "title": "WorkflowNamespace",
+      "type": "string"
+    },
+    "schema_uri": {
+      "title": "Schema Uri",
+      "type": "string"
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Updated At"
+    },
+    "workflow_id": {
+      "examples": [
+        "WFL-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+      ],
+      "pattern": "^WFL-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "title": "WorkflowId",
+      "type": "string"
+    }
+  },
+  "required": [
+    "contract_name",
+    "contract_version",
+    "schema_uri",
+    "created_at",
+    "workflow_id",
+    "namespace",
+    "definition_version",
+    "allowed_states",
+    "initial_state"
+  ],
+  "title": "WorkflowDefinition",
+  "type": "object"
+}

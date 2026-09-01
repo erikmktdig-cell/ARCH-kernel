@@ -339,6 +339,62 @@ aggregate record is in a closed accepted, approved, completed, implemented,
 verified, or closed state. This rule is aggregate-local and intentionally does
 not infer external policy validity.
 
+## Generic Workflow State
+
+C01 adds a generic namespaced workflow authority for downstream packages.
+Consumers own their namespace, exact state vocabulary, initial state, and
+transition policy. Kernel owns only canonical validation, deterministic
+definition lookup, optimistic preconditions, effect scope, and patch
+evaluation; it contains no consumer-specific workflow values.
+
+```python
+from arch_kernel.contracts import (
+    SemanticVersion,
+    WorkflowDefinition,
+    WorkflowId,
+    WorkflowNamespace,
+    WorkflowStateKey,
+)
+from arch_kernel.kernel import initialize_workflow_state
+
+
+definition = WorkflowDefinition(
+    contract_name="workflow_definition",
+    contract_version=SemanticVersion.parse("1.0.0"),
+    schema_uri="urn:arch:contracts:workflow_definition:1.0.0",
+    created_at=created_at,
+    workflow_id=WorkflowId.generate(),
+    namespace=WorkflowNamespace.parse("consumer.delivery"),
+    definition_version=SemanticVersion.parse("1.0.0"),
+    allowed_states=(
+        WorkflowStateKey.parse("draft"),
+        WorkflowStateKey.parse("approved"),
+    ),
+    initial_state=WorkflowStateKey.parse("draft"),
+)
+record = initialize_workflow_state(
+    definition,
+    created_at=created_at,
+    state_version_created=project.record_version,
+)
+```
+
+`WorkflowStateRecord` is persisted in `ProjectState.workflow_registry`; metadata
+and events are not substitutes for operational authority. A
+`WorkflowTransitionDefinition` binds namespace, definition version, definition
+fingerprint, source states, and destination to an explicit closed state space.
+Effects may replace only `/workflows/{entity_id}/current_state`, and exact
+record version and content fingerprint preconditions are mandatory.
+
+Workflow state is not `PhaseStatus`. The existing phase-oriented
+`LifecycleState`, `PhaseCode`, `PhaseStatus`, `project_lifecycle`, and
+`phase_status` semantics remain distinct and unchanged.
+
+ProjectState contract 2.0.0 requires an explicit workflow collection. The
+public K10 migration returned by `build_project_state_v1_to_v2_migration()`
+adds an empty collection and updates contract identity; it never infers or
+invents workflows from metadata. Initialization is a separate explicit action.
+
 ## Invariant Engine
 
 WP-K07 evaluates broader quality, cross-record, release-readiness, and
@@ -440,8 +496,8 @@ disposition, versions, summaries, and deterministic outputs.
 
 ## Contract Registry and JSON Schemas
 
-WP-K09 publishes an explicit immutable catalog for the 35 public Pydantic
-contracts approved in K01-K08. `ContractRegistry` indexes exact identities,
+WP-K09 and C01 publish an explicit immutable catalog for the 38 public Pydantic
+contracts. `ContractRegistry` indexes exact identities,
 latest active versions, aliases, Python model types, kinds, statuses, domains,
 and tags without reflection or dynamic imports.
 

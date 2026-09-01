@@ -148,6 +148,14 @@
           "pattern": "^MIG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
           "title": "MigrationId",
           "type": "string"
+        },
+        {
+          "examples": [
+            "WFL-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^WFL-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "WorkflowId",
+          "type": "string"
         }
       ]
     },
@@ -1467,6 +1475,20 @@
           ],
           "default": null,
           "title": "Updated At"
+        },
+        "workflow_registry": {
+          "patternProperties": {
+            "^WFL-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$": {
+              "$ref": "#/$defs/WorkflowStateRecord"
+            }
+          },
+          "propertyNames": {
+            "examples": [
+              "WFL-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+            ]
+          },
+          "title": "Workflow Registry",
+          "type": "object"
         }
       },
       "required": [
@@ -1479,7 +1501,8 @@
         "state_version_updated",
         "metadata",
         "profile",
-        "lifecycle"
+        "lifecycle",
+        "workflow_registry"
       ],
       "title": "ProjectState",
       "type": "object"
@@ -2276,6 +2299,111 @@
         "metadata"
       ],
       "title": "ValidationStageResult",
+      "type": "object"
+    },
+    "WorkflowStateRecord": {
+      "additionalProperties": false,
+      "description": "Authoritative operational state for one initialized workflow.",
+      "properties": {
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "current_state": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*(?:[.-][A-Za-z0-9_]+)*$",
+          "title": "WorkflowStateKey",
+          "type": "string"
+        },
+        "definition_fingerprint": {
+          "title": "Definition Fingerprint",
+          "type": "string"
+        },
+        "definition_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "namespace": {
+          "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$",
+          "title": "WorkflowNamespace",
+          "type": "string"
+        },
+        "record_version": {
+          "minimum": 1,
+          "title": "Record Version",
+          "type": "integer"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "state_version_created": {
+          "minimum": 0,
+          "title": "State Version Created",
+          "type": "integer"
+        },
+        "state_version_updated": {
+          "minimum": 0,
+          "title": "State Version Updated",
+          "type": "integer"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        },
+        "workflow_id": {
+          "examples": [
+            "WFL-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^WFL-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "WorkflowId",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "record_version",
+        "state_version_created",
+        "state_version_updated",
+        "workflow_id",
+        "namespace",
+        "definition_version",
+        "definition_fingerprint",
+        "current_state"
+      ],
+      "title": "WorkflowStateRecord",
       "type": "object"
     }
   },

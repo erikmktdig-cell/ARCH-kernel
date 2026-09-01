@@ -17,6 +17,7 @@ from arch_kernel.contracts.ids import (
     ProjectId,
     RequirementId,
     RiskId,
+    WorkflowId,
 )
 from arch_kernel.contracts.lifecycle import PhaseExecutionRecord
 from arch_kernel.contracts.patches import (
@@ -42,7 +43,9 @@ from arch_kernel.contracts.transitions import (
     TransitionGuard,
     TransitionRequest,
     TransitionTarget,
+    WorkflowTransitionDefinition,
 )
+from arch_kernel.contracts.workflows import WorkflowStateRecord
 from arch_kernel.kernel.errors import ErrorCode, ErrorDetail, Severity
 from arch_kernel.kernel.event_validation import FrozenJsonValue, thaw_json
 from arch_kernel.kernel.fingerprints import canonicalize_json
@@ -125,6 +128,8 @@ def _resolve_record(state: ProjectState, target: TransitionTarget) -> ContractMo
         entity_id, RequirementId
     ):
         return state.requirement_registry.get(entity_id)
+    if target.domain is TransitionDomain.WORKFLOW_STATE and isinstance(entity_id, WorkflowId):
+        return state.workflow_registry.get(entity_id)
     return None
 
 
@@ -142,6 +147,8 @@ def _resolve_current_state(
         return record.status.value, record
     if isinstance(record, (RiskRecord, RequirementRecord)):
         return record.status, record
+    if isinstance(record, WorkflowStateRecord):
+        return str(record.current_state), record
     return None, record
 
 
@@ -164,6 +171,10 @@ def _public_document(state: ProjectState) -> dict[str, object]:
         },
         "risks": {
             str(key): value.model_dump(mode="json") for key, value in state.risk_registry.items()
+        },
+        "workflows": {
+            str(key): value.model_dump(mode="json")
+            for key, value in state.workflow_registry.items()
         },
         "decisions": {
             str(value.decision_id): value.model_dump(mode="json") for value in state.decision_log
@@ -199,6 +210,8 @@ def _reference_exists(state: ProjectState, reference: TypedReference) -> bool:
         return target_id in state.requirement_registry
     if isinstance(target_id, RiskId):
         return target_id in state.risk_registry
+    if isinstance(target_id, WorkflowId):
+        return target_id in state.workflow_registry
     if isinstance(target_id, DecisionId):
         return any(item.decision_id == target_id for item in state.decision_log)
     return False
@@ -218,6 +231,9 @@ def _reference_status(state: ProjectState, reference: TypedReference) -> str | N
     if isinstance(target_id, RiskId):
         risk = state.risk_registry.get(target_id)
         return None if risk is None else risk.status
+    if isinstance(target_id, WorkflowId):
+        workflow = state.workflow_registry.get(target_id)
+        return None if workflow is None else str(workflow.current_state)
     if isinstance(target_id, DecisionId):
         decision = next(
             (item for item in state.decision_log if item.decision_id == target_id),
@@ -385,6 +401,7 @@ def _scope_for_target(target: TransitionTarget) -> PatchPath:
         TransitionDomain.ARTIFACT_STATUS: "artifacts",
         TransitionDomain.RISK_STATUS: "risks",
         TransitionDomain.REQUIREMENT_STATUS: "requirements",
+        TransitionDomain.WORKFLOW_STATE: "workflows",
     }
     root = roots[target.domain]
     return PatchPath.parse(f"/{root}/{target.entity_id}")
@@ -487,6 +504,18 @@ def evaluate_transition(
             ),
             transition=transition,
         )
+    if request.target.domain is TransitionDomain.WORKFLOW_STATE and not isinstance(
+        transition, WorkflowTransitionDefinition
+    ):
+        return _denied(
+            (
+                _error(
+                    ErrorCode.INVALID_TRANSITION_DEFINITION,
+                    "Workflow target requires a workflow-bound transition definition.",
+                ),
+            ),
+            transition=transition,
+        )
     current_state, target_record = _resolve_current_state(state, request.target)
     if current_state is None or target_record is None:
         return _denied(
@@ -501,6 +530,57 @@ def evaluate_transition(
             ),
             transition=transition,
         )
+    if isinstance(transition, WorkflowTransitionDefinition):
+        if not isinstance(target_record, WorkflowStateRecord):
+            return _denied(
+                (
+                    _error(
+                        ErrorCode.INVALID_REFERENCE,
+                        "Workflow transition target is not a workflow state record.",
+                    ),
+                ),
+                transition=transition,
+            )
+        workflow_definition = registry.workflow_definitions.get(
+            transition.workflow_namespace,
+            transition.workflow_definition_version,
+        )
+        definition_matches = (
+            workflow_definition is not None
+            and target_record.namespace == transition.workflow_namespace
+            and target_record.definition_version == transition.workflow_definition_version
+            and target_record.definition_fingerprint == transition.workflow_definition_fingerprint
+            and current_state in tuple(str(item) for item in workflow_definition.allowed_states)
+        )
+        if not definition_matches:
+            return _denied(
+                (
+                    _error(
+                        ErrorCode.INVALID_REFERENCE,
+                        "Workflow record does not match the transition state space.",
+                        expected=str(transition.workflow_namespace),
+                        actual=str(target_record.namespace),
+                    ),
+                ),
+                transition=transition,
+                current_state=current_state,
+            )
+        if (
+            request.expected_target_record_version is None
+            or request.expected_target_content_fingerprint is None
+        ):
+            return _denied(
+                (
+                    _error(
+                        ErrorCode.STALE_OBJECT_VERSION,
+                        "Workflow transitions require exact target version and fingerprint.",
+                        expected="record version and content fingerprint",
+                        actual="missing precondition",
+                    ),
+                ),
+                transition=transition,
+                current_state=current_state,
+            )
     if current_state not in transition.from_states:
         return _denied(
             (

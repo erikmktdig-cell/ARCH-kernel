@@ -37,6 +37,7 @@ def test_transition_enums_are_stable() -> None:
         "approval_decision",
         "risk_status",
         "requirement_status",
+        "workflow_state",
     )
     assert tuple(item.value for item in GuardType) == (
         "field_equals",

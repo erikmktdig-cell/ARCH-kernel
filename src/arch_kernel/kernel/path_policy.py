@@ -8,6 +8,7 @@ from arch_kernel.contracts.ids import (
     PhaseId,
     RequirementId,
     RiskId,
+    WorkflowId,
 )
 from arch_kernel.contracts.patches import PatchOperationType, PatchPath
 from arch_kernel.kernel.errors import ErrorCode, ErrorDetail, Severity
@@ -21,6 +22,7 @@ _ROOTS = {
     "requirements",
     "decisions",
     "risks",
+    "workflows",
     "dependencies",
 }
 _REQUIRED_ROOTS = {"metadata", "profile", "lifecycle"}
@@ -30,6 +32,7 @@ _TYPED_REGISTRIES = {
     "requirements": RequirementId,
     "decisions": DecisionId,
     "risks": RiskId,
+    "workflows": WorkflowId,
 }
 _FORBIDDEN_FIELDS = {
     "contract_version",

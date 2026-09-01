@@ -35,6 +35,7 @@ from arch_kernel.contracts.ids import (
     RequirementId,
     RiskId,
     TransitionId,
+    WorkflowId,
     target_type_for_id,
 )
 from arch_kernel.contracts.invariants import (
@@ -110,6 +111,7 @@ from arch_kernel.contracts.schema import (
     SchemaJsonValue,
 )
 from arch_kernel.contracts.transitions import (
+    AnyTransitionDefinition,
     EffectType,
     EffectValueSource,
     GuardEvaluation,
@@ -122,6 +124,7 @@ from arch_kernel.contracts.transitions import (
     TransitionJsonValue,
     TransitionRequest,
     TransitionTarget,
+    WorkflowTransitionDefinition,
 )
 from arch_kernel.contracts.validation import (
     InvariantEvaluationTarget,
@@ -137,12 +140,19 @@ from arch_kernel.contracts.validation import (
     ValidationStageResult,
 )
 from arch_kernel.contracts.versions import SemanticVersion
+from arch_kernel.contracts.workflows import (
+    WorkflowDefinition,
+    WorkflowNamespace,
+    WorkflowStateKey,
+    WorkflowStateRecord,
+)
 from arch_kernel.kernel.event_validation import JsonObject
 
 __all__ = (
     "CANONICAL_ID_TYPES",
     "ActorType",
     "AnyCanonicalId",
+    "AnyTransitionDefinition",
     "ApprovalDecision",
     "ApprovalId",
     "ArtifactId",
@@ -264,6 +274,12 @@ __all__ = (
     "ValidationStageResult",
     "VersionBump",
     "VersionedRecord",
+    "WorkflowDefinition",
+    "WorkflowId",
+    "WorkflowNamespace",
+    "WorkflowStateKey",
+    "WorkflowStateRecord",
+    "WorkflowTransitionDefinition",
     "target_type_for_id",
     "validate_canonical_contract_name",
 )

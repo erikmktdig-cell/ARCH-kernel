@@ -21,10 +21,12 @@ from arch_kernel.contracts.ids import (
     ProjectId,
     RequirementId,
     RiskId,
+    WorkflowId,
 )
 from arch_kernel.contracts.lifecycle import LifecycleState, PhaseExecutionRecord
 from arch_kernel.contracts.requirements import RequirementRecord
 from arch_kernel.contracts.risks import RiskRecord
+from arch_kernel.contracts.workflows import WorkflowStateRecord
 
 _PROJECT_SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 ProjectCriticality = Literal["low", "medium", "high", "critical"]
@@ -94,6 +96,7 @@ class ProjectState(VersionedRecord):
     artifact_registry: dict[ArtifactId, ArtifactRecord] = Field(default_factory=dict)
     requirement_registry: dict[RequirementId, RequirementRecord] = Field(default_factory=dict)
     risk_registry: dict[RiskId, RiskRecord] = Field(default_factory=dict)
+    workflow_registry: dict[WorkflowId, WorkflowStateRecord]
     decision_log: tuple[DecisionRecord, ...] = Field(default_factory=tuple)
     dependency_graph: tuple[DependencyEdge, ...] = Field(default_factory=tuple)
     active_baseline_artifact_ids: tuple[ArtifactId, ...] = Field(default_factory=tuple)
@@ -121,6 +124,12 @@ class ProjectState(VersionedRecord):
         for risk_id, risk_record in self.risk_registry.items():
             if risk_id != risk_record.risk_id:
                 raise ValueError("risk_registry key must match record.risk_id.")
+        workflow_namespaces = []
+        for workflow_id, workflow_record in self.workflow_registry.items():
+            if workflow_id != workflow_record.workflow_id:
+                raise ValueError("workflow_registry key must match record.workflow_id.")
+            workflow_namespaces.append(workflow_record.namespace)
+        require_unique(workflow_namespaces, field_name="workflow_registry namespaces")
 
         active_phase_records = [
             record
@@ -211,6 +220,8 @@ class ProjectState(VersionedRecord):
             registry_keys = (decision.decision_id for decision in self.decision_log)
         elif target_type == "phase":
             registry_keys = self.phase_execution_records
+        elif target_type == "workflow":
+            registry_keys = self.workflow_registry
         if registry_keys is not None and not _contains_identifier(registry_keys, target_id):
             raise ValueError("DependencyEdge references an entity absent from ProjectState.")
 

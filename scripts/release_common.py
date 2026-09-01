@@ -450,8 +450,8 @@ for forbidden in json.loads(os.environ["FORBIDDEN_IMPORT_ROOTS"]):
     assert not root.is_relative_to(Path(forbidden).resolve())
 assert arch_kernel.__version__ == importlib.metadata.version("arch-kernel")
 registry = build_builtin_contract_registry()
-assert len(registry.registrations) == 35
-assert len(generate_registry_schemas(registry)) == 35
+assert len(registry.registrations) == 38
+assert len(generate_registry_schemas(registry)) == 38
 schema_root = importlib.resources.files("arch_kernel.schemas")
 assert schema_root.joinpath("manifest.json").is_file()
 state = ProjectState.model_validate_json(Path(os.environ["STATE_FIXTURE"]).read_text())

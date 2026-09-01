@@ -148,6 +148,24 @@
           "pattern": "^MIG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
           "title": "MigrationId",
           "type": "string"
+        },
+        {
+          "examples": [
+            "WFL-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^WFL-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "WorkflowId",
+          "type": "string"
+        }
+      ]
+    },
+    "AnyTransitionDefinition": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TransitionDefinition"
+        },
+        {
+          "$ref": "#/$defs/WorkflowTransitionDefinition"
         }
       ]
     },
@@ -1843,6 +1861,20 @@
           ],
           "default": null,
           "title": "Updated At"
+        },
+        "workflow_registry": {
+          "patternProperties": {
+            "^WFL-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$": {
+              "$ref": "#/$defs/WorkflowStateRecord"
+            }
+          },
+          "propertyNames": {
+            "examples": [
+              "WFL-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+            ]
+          },
+          "title": "Workflow Registry",
+          "type": "object"
         }
       },
       "required": [
@@ -1855,7 +1887,8 @@
         "state_version_updated",
         "metadata",
         "profile",
-        "lifecycle"
+        "lifecycle",
+        "workflow_registry"
       ],
       "title": "ProjectState",
       "type": "object"
@@ -2430,7 +2463,8 @@
         "artifact_status",
         "approval_decision",
         "risk_status",
-        "requirement_status"
+        "requirement_status",
+        "workflow_state"
       ],
       "title": "TransitionDomain",
       "type": "string"
@@ -2623,6 +2657,260 @@
       ],
       "title": "TypedReference",
       "type": "object"
+    },
+    "WorkflowStateRecord": {
+      "additionalProperties": false,
+      "description": "Authoritative operational state for one initialized workflow.",
+      "properties": {
+        "contract_name": {
+          "title": "Contract Name",
+          "type": "string"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "current_state": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*(?:[.-][A-Za-z0-9_]+)*$",
+          "title": "WorkflowStateKey",
+          "type": "string"
+        },
+        "definition_fingerprint": {
+          "title": "Definition Fingerprint",
+          "type": "string"
+        },
+        "definition_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "namespace": {
+          "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$",
+          "title": "WorkflowNamespace",
+          "type": "string"
+        },
+        "record_version": {
+          "minimum": 1,
+          "title": "Record Version",
+          "type": "integer"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "state_version_created": {
+          "minimum": 0,
+          "title": "State Version Created",
+          "type": "integer"
+        },
+        "state_version_updated": {
+          "minimum": 0,
+          "title": "State Version Updated",
+          "type": "integer"
+        },
+        "updated_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Updated At"
+        },
+        "workflow_id": {
+          "examples": [
+            "WFL-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^WFL-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "WorkflowId",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contract_name",
+        "contract_version",
+        "schema_uri",
+        "created_at",
+        "record_version",
+        "state_version_created",
+        "state_version_updated",
+        "workflow_id",
+        "namespace",
+        "definition_version",
+        "definition_fingerprint",
+        "current_state"
+      ],
+      "title": "WorkflowStateRecord",
+      "type": "object"
+    },
+    "WorkflowTransitionDefinition": {
+      "additionalProperties": false,
+      "description": "Transition bound to one exact generic workflow state space.",
+      "properties": {
+        "allow_self_transition": {
+          "default": false,
+          "title": "Allow Self Transition",
+          "type": "boolean"
+        },
+        "contract_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "domain": {
+          "$ref": "#/$defs/TransitionDomain"
+        },
+        "effects": {
+          "items": {
+            "$ref": "#/$defs/TransitionEffect"
+          },
+          "minItems": 1,
+          "title": "Effects",
+          "type": "array"
+        },
+        "from_states": {
+          "items": {
+            "type": "string"
+          },
+          "title": "From States",
+          "type": "array"
+        },
+        "guards": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/TransitionGuard"
+          },
+          "title": "Guards",
+          "type": "array"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "array"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          },
+          "title": "FrozenJsonObject",
+          "type": "object"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "priority": {
+          "default": 100,
+          "maximum": 10000,
+          "minimum": -10000,
+          "title": "Priority",
+          "type": "integer"
+        },
+        "to_state": {
+          "title": "To State",
+          "type": "string"
+        },
+        "transition_id": {
+          "examples": [
+            "TRN-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^TRN-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "TransitionId",
+          "type": "string"
+        },
+        "transition_key": {
+          "title": "Transition Key",
+          "type": "string"
+        },
+        "workflow_definition_fingerprint": {
+          "title": "Workflow Definition Fingerprint",
+          "type": "string"
+        },
+        "workflow_definition_version": {
+          "examples": [
+            "1.0.0",
+            "1.2.3-alpha.1",
+            "1.2.3-rc.1+sha.abc123"
+          ],
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "title": "SemanticVersion",
+          "type": "string"
+        },
+        "workflow_namespace": {
+          "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$",
+          "title": "WorkflowNamespace",
+          "type": "string"
+        }
+      },
+      "required": [
+        "transition_id",
+        "name",
+        "transition_key",
+        "contract_version",
+        "domain",
+        "from_states",
+        "to_state",
+        "effects",
+        "workflow_namespace",
+        "workflow_definition_version",
+        "workflow_definition_fingerprint"
+      ],
+      "title": "WorkflowTransitionDefinition",
+      "type": "object"
     }
   },
   "$id": "https://schemas.arch.local/arch.transition.transition_evaluation_result/1.0.0",
@@ -2699,7 +2987,7 @@
     "transition": {
       "anyOf": [
         {
-          "$ref": "#/$defs/TransitionDefinition"
+          "$ref": "#/$defs/AnyTransitionDefinition"
         },
         {
           "type": "null"

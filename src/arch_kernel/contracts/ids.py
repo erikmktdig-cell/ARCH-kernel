@@ -288,6 +288,11 @@ class MigrationId(CanonicalId):
     target_type = "migration"
 
 
+class WorkflowId(CanonicalId):
+    prefix = "WFL"
+    target_type = "workflow"
+
+
 CANONICAL_ID_TYPES: tuple[type[CanonicalId], ...] = (
     ProjectId,
     PhaseExecutionId,
@@ -306,6 +311,7 @@ CANONICAL_ID_TYPES: tuple[type[CanonicalId], ...] = (
     TransitionId,
     InvariantId,
     MigrationId,
+    WorkflowId,
 )
 
 type AnyCanonicalId = (
@@ -326,6 +332,7 @@ type AnyCanonicalId = (
     | TransitionId
     | InvariantId
     | MigrationId
+    | WorkflowId
 )
 
 
@@ -356,5 +363,6 @@ __all__ = (
     "RequirementId",
     "RiskId",
     "TransitionId",
+    "WorkflowId",
     "target_type_for_id",
 )

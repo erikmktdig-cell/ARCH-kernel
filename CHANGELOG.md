@@ -6,7 +6,25 @@ This project follows a simplified Keep a Changelog format.
 
 ## [Unreleased]
 
-No changes yet.
+### Added
+
+- C01 generic `WorkflowId`, validated workflow namespaces and state tokens,
+  immutable closed `WorkflowDefinition`, authoritative versioned
+  `WorkflowStateRecord`, and deterministic `WorkflowDefinitionRegistry`.
+- Generic `workflow_state` transitions bound to exact definition versions and
+  fingerprints, with fail-closed state validation, mandatory optimistic
+  preconditions, and mutation confined to the targeted workflow record.
+- ProjectState 2.0.0 workflow registry plus an explicit K10 migration from
+  ProjectState 1.0.0 that creates no inferred workflows.
+- Unit, property, migration, regression, and architecture coverage proving
+  deterministic lookup, deep definition immutability, scope confinement, and
+  the absence of downstream vocabulary or dependencies.
+
+### Changed
+
+- The built-in public contract catalog now contains 38 contracts. Existing
+  `PhaseCode`, `PhaseStatus`, and legacy transition-domain values remain
+  byte-identical; workflow state is explicitly distinct from phase status.
 
 ## [0.1.0] - 2026-07-28
 

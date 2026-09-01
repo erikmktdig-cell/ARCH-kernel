@@ -6,7 +6,7 @@
   "patch_id": "PATCH-01HZX7M3FQ1T2Q9V8Y6K4C2B1K",
   "project_id": "PRJ-01HZX7M3FQ1T2Q9V8Y6K4C2B1A",
   "base_state_record_version": 1,
-  "base_state_content_fingerprint": "sha256:37af488676c7b9f696e6c391e447b3da61b8074417778408080bfc6faa2feaaa",
+  "base_state_content_fingerprint": "sha256:bc93d535c00f8f0e57d349ffa4d23c325f781494c820611a3165257a5b92a216",
   "operations": [{
     "op": "replace",
     "path": "/profile",

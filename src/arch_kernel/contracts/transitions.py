@@ -31,10 +31,12 @@ from arch_kernel.contracts.ids import (
     RequirementId,
     RiskId,
     TransitionId,
+    WorkflowId,
 )
 from arch_kernel.contracts.patches import DryRunResult, PatchPath, StatePatch
 from arch_kernel.contracts.references import TypedReference
 from arch_kernel.contracts.versions import SemanticVersion
+from arch_kernel.contracts.workflows import WorkflowNamespace
 from arch_kernel.kernel.errors import ErrorCode, ErrorDetail, ReferenceValidationError
 from arch_kernel.kernel.event_validation import (
     FrozenJsonObject,
@@ -85,6 +87,7 @@ class TransitionDomain(StrEnum):
     APPROVAL_DECISION = "approval_decision"
     RISK_STATUS = "risk_status"
     REQUIREMENT_STATUS = "requirement_status"
+    WORKFLOW_STATE = "workflow_state"
 
 
 @unique
@@ -139,6 +142,7 @@ class TransitionTarget(_FrozenStrictModel):
             TransitionDomain.APPROVAL_DECISION: ApprovalId,
             TransitionDomain.RISK_STATUS: RiskId,
             TransitionDomain.REQUIREMENT_STATUS: RequirementId,
+            TransitionDomain.WORKFLOW_STATE: WorkflowId,
         }
         expected_type = expected_types[self.domain]
         if not isinstance(self.entity_id, expected_type):
@@ -316,6 +320,32 @@ class TransitionDefinition(_FrozenStrictModel):
         return self
 
 
+class WorkflowTransitionDefinition(TransitionDefinition):
+    """Transition bound to one exact generic workflow state space."""
+
+    workflow_namespace: WorkflowNamespace
+    workflow_definition_version: SemanticVersion
+    workflow_definition_fingerprint: str
+
+    @field_validator("workflow_definition_fingerprint")
+    @classmethod
+    def _workflow_fingerprint_must_be_canonical(cls, value: str) -> str:
+        if SHA256_FINGERPRINT_RE.fullmatch(value) is None:
+            raise ValueError(
+                "workflow_definition_fingerprint must use sha256:<64 lowercase hex> format."
+            )
+        return value
+
+    @model_validator(mode="after")
+    def _domain_must_be_workflow_state(self) -> Self:
+        if self.domain is not TransitionDomain.WORKFLOW_STATE:
+            raise ValueError("WorkflowTransitionDefinition requires workflow_state domain.")
+        return self
+
+
+type AnyTransitionDefinition = TransitionDefinition | WorkflowTransitionDefinition
+
+
 class TransitionRequest(_FrozenStrictModel):
     """Immutable request to resolve and evaluate one declared transition."""
 
@@ -387,7 +417,7 @@ class TransitionEvaluationResult(_FrozenStrictModel):
     """Complete deterministic transition evaluation outcome."""
 
     allowed: bool
-    transition: TransitionDefinition | None = None
+    transition: AnyTransitionDefinition | None = None
     current_state: str | None = None
     target_state: str | None = None
     guard_evaluations: tuple[GuardEvaluation, ...] = ()
@@ -413,6 +443,7 @@ class TransitionEvaluationResult(_FrozenStrictModel):
 
 
 __all__ = (
+    "AnyTransitionDefinition",
     "EffectType",
     "EffectValueSource",
     "GuardEvaluation",
@@ -425,4 +456,5 @@ __all__ = (
     "TransitionJsonValue",
     "TransitionRequest",
     "TransitionTarget",
+    "WorkflowTransitionDefinition",
 )

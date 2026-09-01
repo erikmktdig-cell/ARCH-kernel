@@ -137,6 +137,14 @@
           "pattern": "^MIG-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
           "title": "MigrationId",
           "type": "string"
+        },
+        {
+          "examples": [
+            "WFL-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"
+          ],
+          "pattern": "^WFL-[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+          "title": "WorkflowId",
+          "type": "string"
         }
       ]
     },
@@ -148,7 +156,8 @@
         "artifact_status",
         "approval_decision",
         "risk_status",
-        "requirement_status"
+        "requirement_status",
+        "workflow_state"
       ],
       "title": "TransitionDomain",
       "type": "string"

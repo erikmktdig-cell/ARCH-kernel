@@ -10,7 +10,7 @@ def test_package_imports() -> None:
 
 
 def test_package_version() -> None:
-    assert arch_kernel.__version__ == "0.1.0"
+    assert arch_kernel.__version__ == "0.2.0"
     assert version("arch-kernel") == arch_kernel.__version__
 
 

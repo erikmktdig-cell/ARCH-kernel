@@ -4,8 +4,17 @@ from __future__ import annotations
 
 import ast
 from pathlib import Path
+from typing import get_args
 
-from arch_kernel.contracts import PhaseCode, PhaseStatus, TransitionDomain
+from arch_kernel.contracts import (
+    ApprovalDecision,
+    ArtifactStatus,
+    PhaseCode,
+    PhaseStatus,
+    RequirementStatus,
+    RiskStatus,
+    TransitionDomain,
+)
 
 ROOT = Path(__file__).parents[2]
 SOURCE = ROOT / "src" / "arch_kernel"
@@ -65,4 +74,39 @@ def test_public_legacy_enums_are_unchanged_except_authorized_new_domain() -> Non
         "risk_status",
         "requirement_status",
         "workflow_state",
+    )
+    assert tuple(item.value for item in ArtifactStatus) == (
+        "draft",
+        "proposed",
+        "under_review",
+        "changes_requested",
+        "conditionally_approved",
+        "approved",
+        "rejected",
+        "invalidated",
+        "superseded",
+        "archived",
+    )
+    assert tuple(item.value for item in ApprovalDecision) == (
+        "approved",
+        "approved_with_conditions",
+        "rejected",
+        "deferred",
+        "revoked",
+        "expired",
+    )
+    assert get_args(RequirementStatus) == (
+        "proposed",
+        "accepted",
+        "implemented",
+        "verified",
+        "rejected",
+        "deferred",
+    )
+    assert get_args(RiskStatus) == (
+        "open",
+        "mitigating",
+        "accepted",
+        "closed",
+        "materialized",
     )

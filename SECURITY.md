@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Security fixes are considered only for the current `0.1.x` pre-release line.
+Security fixes are considered only for the current `0.2.x` pre-release line.
 Older pre-release revisions are unsupported.
 
 ## Reporting a Vulnerability

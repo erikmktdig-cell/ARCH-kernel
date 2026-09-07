@@ -52,7 +52,7 @@ This repository does not yet contain:
 Install a built wheel without importing from the source checkout:
 
 ```powershell
-uv pip install dist/arch_kernel-0.1.0-py3-none-any.whl
+uv pip install dist/arch_kernel-0.2.0-py3-none-any.whl
 ```
 
 For development, install every locked dependency group:
@@ -70,7 +70,7 @@ uv run ruff check .
 uv run ruff format --check .
 uv run mypy src tests scripts
 uv run pytest -p no:cacheprovider
-uv build
+uv run python -m build --no-isolation
 uv run python scripts/check_artifacts.py dist
 uv run python scripts/check_reproducible_build.py
 uv run python scripts/check_release.py

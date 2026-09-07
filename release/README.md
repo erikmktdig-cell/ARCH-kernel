@@ -15,8 +15,14 @@
 7. Confirm the wheel and sdist hashes independently.
 8. For a tag candidate, run
    `uv run python scripts/check_release.py --tag v<version>`.
-9. Upload candidate artifacts only for inspection. WP-K12 does not authorize
-   publication to PyPI or automatic release creation.
+9. After hosted CI and repository governance pass on the exact final commit,
+   generate the C04 publication manifest with
+   `uv run python scripts/build_publication_manifest.py --source-commit <sha>
+   --test-count <passed> --skip-count <skipped> --coverage <percent>
+   --hosted-ci-url <url>`.
+10. Hash and attach the wheel, sdist, and generated publication manifest to the
+    matching immutable GitHub Release. Publication to PyPI remains outside this
+    repository's release workflow.
 
 Runtime dependency licenses are a strict blocking gate. The development
 environment is inventoried separately in `dist/dependency-licenses.json`;

@@ -63,7 +63,7 @@ def _command(*parts: str) -> Callable[[], None]:
 
 
 def _full_tests() -> None:
-    coverage_path = ROOT / "build" / "release-coverage.json"
+    coverage_path = ROOT / ".release-work" / "release-coverage.json"
     coverage_path.parent.mkdir(parents=True, exist_ok=True)
     run_command(
         (
@@ -130,7 +130,10 @@ def _build() -> None:
     dist = ROOT / "dist"
     if dist.exists():
         shutil.rmtree(dist)
-    run_command(("uv", "build", "--offline"), env=normalized_build_environment())
+    run_command(
+        (sys.executable, "-m", "build", "--no-isolation"),
+        env=normalized_build_environment(),
+    )
 
 
 def _artifact_checks() -> None:
@@ -245,7 +248,7 @@ def _candidate_evidence() -> None:
         marker: _collected_count(marker)
         for marker in ("unit", "contract", "property", "regression", "release")
     }
-    coverage_path = ROOT / "build" / "release-coverage.json"
+    coverage_path = ROOT / ".release-work" / "release-coverage.json"
     if coverage_path.exists():
         coverage_payload = read_json(coverage_path)
         coverage = evidence["coverage"]

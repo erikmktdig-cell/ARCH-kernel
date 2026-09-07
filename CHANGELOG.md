@@ -6,8 +6,13 @@ This project follows a simplified Keep a Changelog format.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-07
+
 ### Added
 
+- C04-K release closeout evidence with installed-distribution workflow,
+  ProjectState 2.0.0 migration and legacy phase compatibility checks, plus a
+  deterministic final publication manifest tied to the release commit and CI.
 - C01 generic `WorkflowId`, validated workflow namespaces and state tokens,
   immutable closed `WorkflowDefinition`, authoritative versioned
   `WorkflowStateRecord`, and deterministic `WorkflowDefinitionRegistry`.

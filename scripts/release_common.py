@@ -21,6 +21,8 @@ from typing import Any, cast
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT_NAME = "arch-kernel"
 PACKAGE_NAME = "arch_kernel"
+REPOSITORY = "erikmktdig-cell/ARCH-kernel"
+C01_IMPLEMENTATION_BASELINE = "cea39add0a6785ad9f34362c476aa4c1488d3d13"
 SUPPORTED_PYTHONS = ("3.12", "3.13")
 RELEASE_POLICY_VERSION = "1.0.0"
 SOURCE_DATE_EPOCH = "1784678400"  # 2026-07-22T00:00:00Z
@@ -36,7 +38,7 @@ EXPECTED_QUALITY_GATES = (
     "uv run pytest -m release",
     "uv run pytest -p no:cacheprovider",
     "git diff --check",
-    "uv build",
+    "uv run python -m build",
     "uv run python scripts/check_artifacts.py dist",
     "uv run python scripts/check_reproducible_build.py",
     "uv run python scripts/check_release.py",
@@ -179,6 +181,13 @@ def stable_release_manifest(root: Path = ROOT) -> dict[str, Any]:
         "release_policy_version": RELEASE_POLICY_VERSION,
         "project_name": PROJECT_NAME,
         "package_version": package_version(root),
+        "implementation_baseline": C01_IMPLEMENTATION_BASELINE,
+        "project_state_contract_version": "2.0.0",
+        "migration": {
+            "identity": "project.state_add_workflow_registry",
+            "source_version": "1.0.0",
+            "target_version": "2.0.0",
+        },
         "version_source": "src/arch_kernel/__about__.py",
         "supported_python_versions": list(SUPPORTED_PYTHONS),
         "build_backend": {
@@ -432,16 +441,39 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import arch_kernel
+from pydantic import BaseModel, ConfigDict
 from arch_kernel.contracts import (
+    ApprovalDecision,
+    ArtifactStatus,
+    ContractDescriptor,
+    ContractKind,
+    ContractRegistration,
+    ContractStatus,
+    MigrationRequest,
+    PhaseCode,
+    PhaseStatus,
     ProjectState,
+    RequirementStatus,
+    RiskStatus,
+    SemanticVersion,
     StatePatch,
     ValidationIntent,
     ValidationPipelineRequest,
+    WorkflowDefinition,
+    WorkflowId,
+    WorkflowNamespace,
+    WorkflowStateKey,
 )
 from arch_kernel.kernel import (
+    ContractRegistry,
+    MigrationRegistry,
     apply_state_patch_dry_run,
+    build_project_state_v1_to_v2_migration,
     build_builtin_contract_registry,
+    compute_fingerprint,
+    generate_contract_schema,
     generate_registry_schemas,
+    run_migration_dry_run,
     run_validation_pipeline,
 )
 
@@ -455,6 +487,8 @@ assert len(generate_registry_schemas(registry)) == 38
 schema_root = importlib.resources.files("arch_kernel.schemas")
 assert schema_root.joinpath("manifest.json").is_file()
 state = ProjectState.model_validate_json(Path(os.environ["STATE_FIXTURE"]).read_text())
+assert str(state.contract_version) == "2.0.0"
+assert state.workflow_registry == {}
 patch = StatePatch.model_validate_json(Path(os.environ["PATCH_FIXTURE"]).read_text())
 dry_run = apply_state_patch_dry_run(state, patch)
 assert dry_run.validation.is_valid and dry_run.projected_state is not None
@@ -464,6 +498,81 @@ request = ValidationPipelineRequest.model_validate({
     "state": state.model_dump(mode="json"),
 })
 assert run_validation_pipeline(request).success
+
+definition = WorkflowDefinition(
+    contract_name="workflow_definition",
+    contract_version=SemanticVersion.parse("1.0.0"),
+    schema_uri="urn:arch:contracts:workflow_definition:1.0.0",
+    created_at=datetime(2026, 7, 28, 12, 0, tzinfo=UTC),
+    workflow_id=WorkflowId.from_str("WFL-01HZX7M3FQ1T2Q9V8Y6K4C2B1A"),
+    namespace=WorkflowNamespace.parse("consumer.release"),
+    definition_version=SemanticVersion.parse("1.0.0"),
+    allowed_states=(WorkflowStateKey.parse("draft"), WorkflowStateKey.parse("released")),
+    initial_state=WorkflowStateKey.parse("draft"),
+)
+assert WorkflowDefinition.model_validate_json(definition.model_dump_json()) == definition
+
+assert PhaseCode.F01.value == "F01"
+assert PhaseStatus.ACTIVE.value == "active"
+assert ArtifactStatus.APPROVED.value == "approved"
+assert ApprovalDecision.APPROVED.value == "approved"
+assert "verified" in RequirementStatus.__args__
+assert "closed" in RiskStatus.__args__
+
+class LegacyProjectStateV1(BaseModel):
+    model_config = ConfigDict(extra="allow", strict=True)
+    contract_name: str
+    contract_version: str
+    schema_uri: str
+
+def registration(model, version):
+    semantic_version = SemanticVersion.parse(version)
+    descriptor = ContractDescriptor(
+        canonical_name="arch.project.project_state",
+        version=semantic_version,
+        kind=ContractKind.RECORD,
+        status=ContractStatus.ACTIVE,
+        python_module=model.__module__,
+        python_qualname=model.__qualname__,
+        schema_id=f"https://schemas.arch.local/arch.project.project_state/{version}",
+        schema_filename=f"contracts/arch.project.project_state.{version}.schema.json",
+        title=model.__name__,
+        model_fingerprint=compute_fingerprint(
+            {"module": model.__module__, "qualname": model.__qualname__}
+        ),
+        schema_fingerprint="sha256:" + ("0" * 64),
+        descriptor_version=SemanticVersion.parse("1.0.0"),
+    )
+    provisional = ContractRegistration(descriptor, model)
+    schema = generate_contract_schema(provisional)
+    return ContractRegistration(
+        descriptor.model_copy(update={"schema_fingerprint": schema.schema_fingerprint}), model
+    )
+
+legacy = state.model_dump(mode="json")
+legacy.pop("workflow_registry")
+legacy["contract_version"] = "1.0.0"
+legacy["schema_uri"] = "urn:arch:contracts:project_state:1.0.0"
+contracts = ContractRegistry(
+    (registration(LegacyProjectStateV1, "1.0.0"), registration(ProjectState, "2.0.0"))
+)
+migration = build_project_state_v1_to_v2_migration()
+migrations = MigrationRegistry((migration,), contracts)
+result = run_migration_dry_run(
+    MigrationRequest.model_validate(
+        {
+            "canonical_name": "arch.project.project_state",
+            "source_version": "1.0.0",
+            "target_version": "2.0.0",
+            "source_payload": legacy,
+            "evaluated_at": datetime(2026, 7, 28, 12, 0, tzinfo=UTC),
+        }
+    ),
+    migrations,
+    contracts,
+)
+assert result.success
+assert result.final_payload["workflow_registry"] == {}
 """.lstrip(),
             encoding="utf-8",
             newline="\n",
@@ -596,9 +705,11 @@ def release_environment_blockers(root: Path = ROOT) -> list[str]:
 
 
 __all__ = (
+    "C01_IMPLEMENTATION_BASELINE",
     "EXPECTED_QUALITY_GATES",
     "PROJECT_NAME",
     "RELEASE_POLICY_VERSION",
+    "REPOSITORY",
     "ROOT",
     "SECURITY_CONTACT_PLACEHOLDER",
     "SOURCE_DATE_EPOCH",
